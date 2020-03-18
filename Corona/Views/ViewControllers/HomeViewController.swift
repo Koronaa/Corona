@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    
+class HomeViewController: UIViewController {
     
     @IBOutlet weak var dateTimeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noRecordLabel: UILabel!
     
     var statistics:Statistics?
     var refreshControl = UIRefreshControl()
@@ -20,16 +20,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadStatistics()
         setupRefreshControl()
-        
-        
+        setupTableView()
+        tableView.reloadData()
+        self.setupUI(statistics: statistics!)
     }
     
     func setupTableView(){
-        tableView.register(UINib(nibName: "OverviewCell", bundle: .main), forCellReuseIdentifier: "overviewCell")
-        tableView.register(UINib(nibName: "HospitalDataTVCell", bundle: .main), forCellReuseIdentifier: "hospitalDataCell")
+        tableView.register(UINib(nibName: "OverviewCell", bundle: .main), forCellReuseIdentifier: UIConstants.Cell.OVERVIEW_TV_CELL)
+        tableView.register(UINib(nibName: "HospitalDataTVCell", bundle: .main), forCellReuseIdentifier: UIConstants.Cell.HOSPITALDATA_TV_CELL)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -42,24 +41,31 @@ class ViewController: UIViewController {
     
     func loadStatistics(){
         let statServiceIMPL = StatServiceIMPL()
-        statServiceIMPL.getStatData { (stat, errorMessage) in
+        statServiceIMPL.getStatData { (stat, errorMessage, isRetry) in
+            self.refreshControl.endRefreshing()
             if let statistics = stat{
                 print(statistics)
                 self.statistics = statistics
-                self.setupUI(date: statistics.updatedDate)
+                self.setupUI(statistics: statistics)
                 self.setupTableView()
                 self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
             }else{
-                print(errorMessage ?? "Error")
+                UIHelper.makeSnackBar(message: errorMessage ?? "Error", type: .ERROR)
             }
         }
     }
     
-    func setupUI(date:Date){
+    func setupUI(statistics:Statistics){
+        let date = statistics.updatedDate
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy h:mm a"
         dateTimeLabel.text = "Last updated on \(dateFormatter.string(from: date))"
+        
+        if statistics.hospitals.count == 0{
+            UIHelper.show(view: noRecordLabel)
+        }else{
+            UIHelper.hide(view: noRecordLabel)
+        }
     }
     
     @objc func refresh() {
@@ -67,7 +73,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController:UITableViewDelegate,UITableViewDataSource{
+extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -88,11 +94,11 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource{
         let section = indexPath.section
         switch section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "overviewCell", for: indexPath) as! OverviewTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.OVERVIEW_TV_CELL, for: indexPath) as! OverviewTableViewCell
             cell.stat = self.statistics
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "hospitalDataCell", for: indexPath) as! HospitalDataTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.HOSPITALDATA_TV_CELL, for: indexPath) as! HospitalDataTableViewCell
             cell.hospital = self.statistics!.hospitals[indexPath.row]
             return cell
         default:()
@@ -136,7 +142,5 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource{
         
         return headerView
     }
-    
-    
 }
 

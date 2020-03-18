@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 class StatServiceIMPL{
     
-    func getStatData(onCompleted:@escaping (_ stat:Statistics?,_ errorMessage:String?)->Void){
+    func getStatData(onCompleted:@escaping (_ stat:Statistics?,_ errorMessage:String?,_ isRetry:Bool)->Void){
         let statService = StatService()
         statService.getStatData { (response, responseCode) in
             if responseCode == 200{
@@ -45,21 +45,23 @@ class StatServiceIMPL{
                                         }
                                     }
                                     let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, hospitals: hospitals)
-                                    onCompleted(statData,nil)
+                                    onCompleted(statData,nil,false)
                                 }else{
                                     let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, hospitals: hospitals)
-                                    onCompleted(statData,nil)
+                                    onCompleted(statData,nil,false)
                                 }
                             }else{
                                 let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, hospitals: hospitals)
-                                onCompleted(statData,nil)
+                                onCompleted(statData,nil,false)
                             }
                             
                         }
                     }
                 }
+            }else if responseCode == 515{
+                onCompleted(nil,"You are appear to be offline. Please try again.",true)
             }else{
-                onCompleted(nil,"Error while retrieving data. Please try again")
+                onCompleted(nil,"Error while retrieving data. Please try again",true)
             }
         }
     }

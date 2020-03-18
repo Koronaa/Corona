@@ -3,16 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3D830E4D2421F2490017F7DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E4C2421F2490017F7DC /* AppDelegate.swift */; };
 		3D830E4F2421F2490017F7DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E4E2421F2490017F7DC /* SceneDelegate.swift */; };
-		3D830E512421F2490017F7DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E502421F2490017F7DC /* ViewController.swift */; };
-		3D830E542421F2490017F7DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D830E522421F2490017F7DC /* Main.storyboard */; };
+		3D830E512421F2490017F7DC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E502421F2490017F7DC /* HomeViewController.swift */; };
 		3D830E562421F24C0017F7DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D830E552421F24C0017F7DC /* Assets.xcassets */; };
-		3D830E592421F24C0017F7DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D830E572421F24C0017F7DC /* LaunchScreen.storyboard */; };
 		3D830E612421F6E10017F7DC /* OverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D830E602421F6E10017F7DC /* OverviewCell.xib */; };
 		3D830E632421FF510017F7DC /* HospitalDataTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D830E622421FF510017F7DC /* HospitalDataTVCell.xib */; };
 		3D830E6B24220E1B0017F7DC /* Hospital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E6A24220E1B0017F7DC /* Hospital.swift */; };
@@ -25,6 +23,10 @@
 		3D830E7D2422326A0017F7DC /* OverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E7C2422326A0017F7DC /* OverviewTableViewCell.swift */; };
 		3D830E7F2422327A0017F7DC /* HospitalDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E7E2422327A0017F7DC /* HospitalDataTableViewCell.swift */; };
 		3D830E8224223E430017F7DC /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E8124223E430017F7DC /* UIHelper.swift */; };
+		3DBBFF4C24229CF00012D6A6 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBFF4B24229CF00012D6A6 /* InitialViewController.swift */; };
+		3DBBFF4E24229E5B0012D6A6 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBFF4D24229E5B0012D6A6 /* UIConstants.swift */; };
+		3DBBFF4F24229FD50012D6A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D830E522421F2490017F7DC /* Main.storyboard */; };
+		3DBBFF5024229FD50012D6A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D830E572421F24C0017F7DC /* LaunchScreen.storyboard */; };
 		ACE659DFF7583F9B71860D91 /* libPods-Corona.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C7C59C099CEB76D156B069 /* libPods-Corona.a */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +34,7 @@
 		3D830E492421F2490017F7DC /* Corona.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Corona.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D830E4C2421F2490017F7DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D830E4E2421F2490017F7DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3D830E502421F2490017F7DC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3D830E502421F2490017F7DC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3D830E532421F2490017F7DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3D830E552421F24C0017F7DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D830E582421F24C0017F7DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		3D830E7C2422326A0017F7DC /* OverviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTableViewCell.swift; sourceTree = "<group>"; };
 		3D830E7E2422327A0017F7DC /* HospitalDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDataTableViewCell.swift; sourceTree = "<group>"; };
 		3D830E8124223E430017F7DC /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		3DBBFF4B24229CF00012D6A6 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		3DBBFF4D24229E5B0012D6A6 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		84C7C59C099CEB76D156B069 /* libPods-Corona.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Corona.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9116124C9438ECBA0C523599 /* Pods-Corona.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corona.debug.xcconfig"; path = "Target Support Files/Pods-Corona/Pods-Corona.debug.xcconfig"; sourceTree = "<group>"; };
 		9DA1216B457735D200BE4A64 /* Pods-Corona.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corona.release.xcconfig"; path = "Target Support Files/Pods-Corona/Pods-Corona.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,7 +126,8 @@
 		3D830E6624220C280017F7DC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D830E502421F2490017F7DC /* ViewController.swift */,
+				3D830E502421F2490017F7DC /* HomeViewController.swift */,
+				3DBBFF4B24229CF00012D6A6 /* InitialViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				3D830E6F24220F8A0017F7DC /* URLConstants.swift */,
+				3DBBFF4D24229E5B0012D6A6 /* UIConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -274,11 +280,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DBBFF4F24229FD50012D6A6 /* Main.storyboard in Resources */,
+				3DBBFF5024229FD50012D6A6 /* LaunchScreen.storyboard in Resources */,
 				3D830E612421F6E10017F7DC /* OverviewCell.xib in Resources */,
 				3D830E632421FF510017F7DC /* HospitalDataTVCell.xib in Resources */,
-				3D830E592421F24C0017F7DC /* LaunchScreen.storyboard in Resources */,
 				3D830E562421F24C0017F7DC /* Assets.xcassets in Resources */,
-				3D830E542421F2490017F7DC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,10 +321,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D830E8224223E430017F7DC /* UIHelper.swift in Sources */,
+				3DBBFF4C24229CF00012D6A6 /* InitialViewController.swift in Sources */,
+				3DBBFF4E24229E5B0012D6A6 /* UIConstants.swift in Sources */,
 				3D830E7D2422326A0017F7DC /* OverviewTableViewCell.swift in Sources */,
 				3D830E792422134B0017F7DC /* StatService.swift in Sources */,
 				3D830E752422115C0017F7DC /* ReachabilityManager.swift in Sources */,
-				3D830E512421F2490017F7DC /* ViewController.swift in Sources */,
+				3D830E512421F2490017F7DC /* HomeViewController.swift in Sources */,
 				3D830E7B2422142C0017F7DC /* StatServiceIMPL.swift in Sources */,
 				3D830E6B24220E1B0017F7DC /* Hospital.swift in Sources */,
 				3D830E4D2421F2490017F7DC /* AppDelegate.swift in Sources */,

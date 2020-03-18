@@ -25,8 +25,7 @@ class ServiceManager{
                 }
             }
         }else{
-            //        UIHelper.hideHUD()
-            //        UIHelper.makeNoInternetAlert()
+            onResponse?(nil,515)
         }
     }
     

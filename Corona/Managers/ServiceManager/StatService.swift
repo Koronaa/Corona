@@ -32,8 +32,12 @@ class StatService{
     
     func getStatData(onResponse:onAPIResponse?){
         ServiceManager.APIRequest(url: StatRouter.getStat.url, method: StatRouter.getStat.method) { (response, responseCode) in
-            let jsonData:JSON = JSON((response as! DataResponse<Any>).result.value!)
-            onResponse?(jsonData,responseCode)
+            if response != nil{
+                let jsonData:JSON = JSON((response as! DataResponse<Any>).result.value!)
+                onResponse?(jsonData,responseCode)
+            }else{
+                onResponse?(nil,responseCode)
+            }
         }
     }
 }
