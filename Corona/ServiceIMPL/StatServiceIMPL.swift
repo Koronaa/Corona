@@ -25,7 +25,7 @@ class StatServiceIMPL{
                             
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                            let date = dateFormatter.date(from: dateTime)!
+                            let date = dateFormatter.date(from: dateTime) ?? Date()
                             
                             if let hospitalData = statData["hospital_data"]?.array{
                                 if hospitalData.count > 0{
