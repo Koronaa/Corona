@@ -20,9 +20,9 @@ class OverviewTableViewCell: UITableViewCell {
     var stat:Statistics?{
         didSet{
             setupCell()
-            reportedCasesCountLabel.text = self.stat!.reportedCasesCount.description
-            recoveredCountLabel.text = self.stat!.recoveredCount.description
-            deathCountLabel.text = self.stat!.deathCount.description
+            reportedCasesCountLabel.text = self.stat!.reportedCasesCount.delimiter
+            recoveredCountLabel.text = self.stat!.recoveredCount.delimiter
+            deathCountLabel.text = self.stat!.deathCount.delimiter
         }
     }
     
