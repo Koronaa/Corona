@@ -44,7 +44,7 @@ class HomeViewController: UIViewController {
         statServiceIMPL.getStatData { (stat, errorMessage, isRetry) in
             self.refreshControl.endRefreshing()
             if let statistics = stat{
-                print(statistics)
+//                print(statistics)
                 self.statistics = statistics
                 self.setupUI(statistics: statistics)
                 self.setupTableView()

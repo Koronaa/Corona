@@ -16,9 +16,9 @@ class ServiceManager{
     
     static func APIRequest(url:URL,method:HTTPMethod,params:Parameters? = nil,headers:HTTPHeaders? = nil,encoding:ParameterEncoding? = JSONEncoding.default,onResponse:onAPIResponse?){
         if ReachabilityManager.isConnectedToNetwork(){
-            print ("Header: \(String(describing: headers))")
-            print("Request URL: \(url)")
-            print("Request Body: \(String(describing: params))")
+//            print ("Header: \(String(describing: headers))")
+//            print("Request URL: \(url)")
+//            print("Request Body: \(String(describing: params))")
             Alamofire.request(url, method: method, parameters: params, encoding: encoding!, headers: headers).responseJSON{ response in
                 if let statusCode = response.response?.statusCode{
                     onResponse?(response,statusCode)
