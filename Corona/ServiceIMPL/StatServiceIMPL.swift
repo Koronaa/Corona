@@ -25,6 +25,7 @@ class StatServiceIMPL{
                             
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
                             let date = dateFormatter.date(from: dateTime) ?? Date()
                             
                             if let hospitalData = statData["hospital_data"]?.array{
