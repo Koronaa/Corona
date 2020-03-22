@@ -23,6 +23,7 @@
 		3D830E7D2422326A0017F7DC /* OverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E7C2422326A0017F7DC /* OverviewTableViewCell.swift */; };
 		3D830E7F2422327A0017F7DC /* HospitalDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E7E2422327A0017F7DC /* HospitalDataTableViewCell.swift */; };
 		3D830E8224223E430017F7DC /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E8124223E430017F7DC /* UIHelper.swift */; };
+		3D8F295D24274F490061B372 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D8F295C24274F490061B372 /* GoogleService-Info.plist */; };
 		3DAE1F7824232D2400F6E019 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAE1F7724232D2400F6E019 /* Int.swift */; };
 		3DBBFF4C24229CF00012D6A6 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBFF4B24229CF00012D6A6 /* InitialViewController.swift */; };
 		3DBBFF4E24229E5B0012D6A6 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBFF4D24229E5B0012D6A6 /* UIConstants.swift */; };
@@ -52,6 +53,8 @@
 		3D830E7C2422326A0017F7DC /* OverviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTableViewCell.swift; sourceTree = "<group>"; };
 		3D830E7E2422327A0017F7DC /* HospitalDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDataTableViewCell.swift; sourceTree = "<group>"; };
 		3D830E8124223E430017F7DC /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		3D8F295C24274F490061B372 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3D8F295E242757CB0061B372 /* Corona.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Corona.entitlements; sourceTree = "<group>"; };
 		3DAE1F7724232D2400F6E019 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		3DBBFF4B24229CF00012D6A6 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		3DBBFF4D24229E5B0012D6A6 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
@@ -93,6 +96,7 @@
 		3D830E4B2421F2490017F7DC /* Corona */ = {
 			isa = PBXGroup;
 			children = (
+				3D8F295E242757CB0061B372 /* Corona.entitlements */,
 				3DAE1F7624232D0F00F6E019 /* Extensions */,
 				3D830E8024223E370017F7DC /* Helpers */,
 				3D830E762422130A0017F7DC /* ServiceIMPL */,
@@ -108,6 +112,7 @@
 		3D830E6424220BFE0017F7DC /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				3D8F295C24274F490061B372 /* GoogleService-Info.plist */,
 				3D830E552421F24C0017F7DC /* Assets.xcassets */,
 				3D830E4C2421F2490017F7DC /* AppDelegate.swift */,
 				3D830E4E2421F2490017F7DC /* SceneDelegate.swift */,
@@ -296,6 +301,7 @@
 				3D830E612421F6E10017F7DC /* OverviewCell.xib in Resources */,
 				3D830E632421FF510017F7DC /* HospitalDataTVCell.xib in Resources */,
 				3D830E562421F24C0017F7DC /* Assets.xcassets in Resources */,
+				3D8F295D24274F490061B372 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,9 +497,10 @@
 			baseConfigurationReference = 9116124C9438ECBA0C523599 /* Pods-Corona.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Corona/Corona.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = R3GW2NEGBJ;
 				INFOPLIST_FILE = Corona/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -501,7 +508,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korona.coronalk;
 				PRODUCT_NAME = Corona;
 				PROVISIONING_PROFILE_SPECIFIER = "Corona Dev";
@@ -515,9 +522,10 @@
 			baseConfigurationReference = 9DA1216B457735D200BE4A64 /* Pods-Corona.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Corona/Corona.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = R3GW2NEGBJ;
 				INFOPLIST_FILE = Corona/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -525,7 +533,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korona.coronalk;
 				PRODUCT_NAME = Corona;
 				PROVISIONING_PROFILE_SPECIFIER = "Corona App Store";

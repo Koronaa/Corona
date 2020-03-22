@@ -31,7 +31,7 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(+5)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ee-OS-wke">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" (+5)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ee-OS-wke">
                                 <rect key="frame" x="20" y="76.5" width="354" height="16"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="11"/>
                                 <nil key="textColor"/>
@@ -80,8 +80,8 @@
                                                 <color key="textColor" red="0.86274509803921573" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(+1)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QD-n4-nOn">
-                                                <rect key="frame" x="10" y="57.5" width="167" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(+1)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QD-n4-nOn">
+                                                <rect key="frame" x="10" y="62.5" width="167" height="16"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="11"/>
                                                 <color key="textColor" red="0.86274509799999999" green="0.3294117647" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="3QD-n4-nOn" firstAttribute="leading" secondItem="Slu-12-3i0" secondAttribute="leading" constant="10" id="5jO-7x-I4r"/>
-                                            <constraint firstAttribute="bottom" secondItem="3QD-n4-nOn" secondAttribute="bottom" constant="-5" id="621-1b-oSe"/>
+                                            <constraint firstAttribute="bottom" secondItem="3QD-n4-nOn" secondAttribute="bottom" constant="-10" id="621-1b-oSe"/>
                                             <constraint firstItem="i71-yi-zZE" firstAttribute="top" secondItem="Slu-12-3i0" secondAttribute="top" constant="5" id="Cff-Vw-pi9"/>
                                             <constraint firstAttribute="trailing" secondItem="3QD-n4-nOn" secondAttribute="trailing" constant="10" id="DNa-C5-DrV"/>
                                             <constraint firstAttribute="trailing" secondItem="zeZ-lg-Znx" secondAttribute="trailing" constant="10" id="ETV-i7-4Zq"/>
@@ -141,9 +141,7 @@
             <connections>
                 <outlet property="deathCountLabel" destination="zeZ-lg-Znx" id="TVi-9f-CBI"/>
                 <outlet property="newCasesCountLabel" destination="9ee-OS-wke" id="4tB-dJ-NcM"/>
-                <outlet property="newCasesLabelLeadingCostraint" destination="JHN-K3-bzP" id="det-sJ-uRT"/>
                 <outlet property="newDeathCountLabel" destination="3QD-n4-nOn" id="BZh-EQ-YXa"/>
-                <outlet property="newDeathCountLeadingConstraint" destination="5jO-7x-I4r" id="9l6-5o-jCH"/>
                 <outlet property="recoveredCountLabel" destination="txQ-Y3-pGp" id="tEM-qV-Uzm"/>
                 <outlet property="reportedCasesCountLabel" destination="yHH-vR-f8O" id="MKz-Hl-i4D"/>
                 <outlet property="rightSidedView" destination="Slu-12-3i0" id="bwb-hl-LAg"/>

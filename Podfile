@@ -9,4 +9,6 @@ target 'Corona' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'TTGSnackbar'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
 end
