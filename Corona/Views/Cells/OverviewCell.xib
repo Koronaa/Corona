@@ -31,6 +31,12 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(+5)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ee-OS-wke">
+                                <rect key="frame" x="20" y="76.5" width="354" height="16"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X5B-Xb-Co9">
                                 <rect key="frame" x="0.0" y="91.5" width="394" height="74.5"/>
                                 <subviews>
@@ -74,9 +80,18 @@
                                                 <color key="textColor" red="0.86274509803921573" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(+1)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QD-n4-nOn">
+                                                <rect key="frame" x="10" y="57.5" width="167" height="16"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="11"/>
+                                                <color key="textColor" red="0.86274509799999999" green="0.3294117647" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="3QD-n4-nOn" firstAttribute="leading" secondItem="Slu-12-3i0" secondAttribute="leading" constant="10" id="5jO-7x-I4r"/>
+                                            <constraint firstAttribute="bottom" secondItem="3QD-n4-nOn" secondAttribute="bottom" constant="-5" id="621-1b-oSe"/>
                                             <constraint firstItem="i71-yi-zZE" firstAttribute="top" secondItem="Slu-12-3i0" secondAttribute="top" constant="5" id="Cff-Vw-pi9"/>
+                                            <constraint firstAttribute="trailing" secondItem="3QD-n4-nOn" secondAttribute="trailing" constant="10" id="DNa-C5-DrV"/>
                                             <constraint firstAttribute="trailing" secondItem="zeZ-lg-Znx" secondAttribute="trailing" constant="10" id="ETV-i7-4Zq"/>
                                             <constraint firstItem="zeZ-lg-Znx" firstAttribute="top" secondItem="i71-yi-zZE" secondAttribute="bottom" constant="5" id="FQe-Pm-1Tt"/>
                                             <constraint firstAttribute="trailing" secondItem="i71-yi-zZE" secondAttribute="trailing" id="dZA-W3-K3e"/>
@@ -104,11 +119,14 @@
                             <constraint firstItem="X5B-Xb-Co9" firstAttribute="top" secondItem="yHH-vR-f8O" secondAttribute="bottom" constant="5" id="89W-fd-qc4"/>
                             <constraint firstItem="yHH-vR-f8O" firstAttribute="top" secondItem="TrA-PJ-HLt" secondAttribute="bottom" constant="5" id="9Ci-tU-6Oe"/>
                             <constraint firstAttribute="bottom" secondItem="X5B-Xb-Co9" secondAttribute="bottom" constant="20" id="APU-UL-upC"/>
+                            <constraint firstItem="9ee-OS-wke" firstAttribute="leading" secondItem="jAO-4I-DeI" secondAttribute="leading" constant="20" id="JHN-K3-bzP"/>
                             <constraint firstAttribute="trailing" secondItem="X5B-Xb-Co9" secondAttribute="trailing" constant="10" id="PzW-xY-HJS"/>
                             <constraint firstItem="TrA-PJ-HLt" firstAttribute="top" secondItem="jAO-4I-DeI" secondAttribute="top" constant="20" id="cYc-ty-s1i"/>
                             <constraint firstItem="X5B-Xb-Co9" firstAttribute="leading" secondItem="jAO-4I-DeI" secondAttribute="leading" constant="10" id="ei3-9n-yXc"/>
                             <constraint firstAttribute="trailing" secondItem="yHH-vR-f8O" secondAttribute="trailing" constant="20" id="pQk-yd-oOq"/>
                             <constraint firstAttribute="trailing" secondItem="TrA-PJ-HLt" secondAttribute="trailing" constant="20" id="plw-Sf-Ean"/>
+                            <constraint firstItem="9ee-OS-wke" firstAttribute="top" secondItem="yHH-vR-f8O" secondAttribute="bottom" constant="-10" id="q6q-3s-42C"/>
+                            <constraint firstAttribute="trailing" secondItem="9ee-OS-wke" secondAttribute="trailing" constant="20" id="ybu-cG-YyN"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -122,8 +140,13 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="deathCountLabel" destination="zeZ-lg-Znx" id="TVi-9f-CBI"/>
+                <outlet property="newCasesCountLabel" destination="9ee-OS-wke" id="4tB-dJ-NcM"/>
+                <outlet property="newCasesLabelLeadingCostraint" destination="JHN-K3-bzP" id="det-sJ-uRT"/>
+                <outlet property="newDeathCountLabel" destination="3QD-n4-nOn" id="BZh-EQ-YXa"/>
+                <outlet property="newDeathCountLeadingConstraint" destination="5jO-7x-I4r" id="9l6-5o-jCH"/>
                 <outlet property="recoveredCountLabel" destination="txQ-Y3-pGp" id="tEM-qV-Uzm"/>
                 <outlet property="reportedCasesCountLabel" destination="yHH-vR-f8O" id="MKz-Hl-i4D"/>
+                <outlet property="rightSidedView" destination="Slu-12-3i0" id="bwb-hl-LAg"/>
                 <outlet property="shadowView" destination="jAO-4I-DeI" id="ffM-gm-BaN"/>
             </connections>
             <point key="canvasLocation" x="85.507246376811594" y="46.205357142857139"/>

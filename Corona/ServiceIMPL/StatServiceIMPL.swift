@@ -21,7 +21,9 @@ class StatServiceIMPL{
                         if let dateTime = statData["update_date_time"]?.string,
                             let totalCases = statData["local_total_cases"]?.int,
                             let deaths = statData["local_deaths"]?.int,
-                            let recovered = statData["local_recovered"]?.int{
+                            let recovered = statData["local_recovered"]?.int,
+                            let newCases = statData["local_new_cases"]?.int,
+                            let newDeaths = statData["local_new_deaths"]?.int  {
                             
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -45,14 +47,14 @@ class StatServiceIMPL{
                                             }
                                         }
                                     }
-                                    let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, hospitals: hospitals)
+                                    let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, newCasesCount: newCases, newDeathCount: newDeaths, hospitals: hospitals)
                                     onCompleted(statData,nil,false)
                                 }else{
-                                    let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, hospitals: hospitals)
+                                    let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, newCasesCount: newCases, newDeathCount: newDeaths, hospitals: hospitals)
                                     onCompleted(statData,nil,false)
                                 }
                             }else{
-                                let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, hospitals: hospitals)
+                                let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, newCasesCount: newCases, newDeathCount: newDeaths, hospitals: hospitals)
                                 onCompleted(statData,nil,false)
                             }
                             

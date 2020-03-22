@@ -10,7 +10,12 @@ import UIKit
 
 class OverviewTableViewCell: UITableViewCell {
     
-    
+
+    @IBOutlet weak var rightSidedView: UIView!
+    @IBOutlet weak var newDeathCountLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var newDeathCountLabel: UILabel!
+    @IBOutlet weak var newCasesCountLabel: UILabel!
+    @IBOutlet weak var newCasesLabelLeadingCostraint: NSLayoutConstraint!
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var reportedCasesCountLabel: UILabel!
     @IBOutlet weak var recoveredCountLabel: UILabel!
@@ -23,10 +28,34 @@ class OverviewTableViewCell: UITableViewCell {
             reportedCasesCountLabel.text = self.stat!.reportedCasesCount.delimiter
             recoveredCountLabel.text = self.stat!.recoveredCount.delimiter
             deathCountLabel.text = self.stat!.deathCount.delimiter
+            
+            let newCases = self.stat!.newCasesCount
+            let newDeaths = self.stat!.newDeathCount
+            
+            if newCases > 0{
+                UIHelper.show(view: newCasesCountLabel)
+                newCasesCountLabel.text = "(+\(newCases))"
+            }else if newCases == 0{
+                UIHelper.hide(view: newCasesCountLabel)
+            }
+            
+            if self.stat!.deathCount > 0{
+                if newDeaths > 0{
+                    UIHelper.show(view: newDeathCountLabel)
+                    newDeathCountLabel.text = "(+\(newDeaths))"
+                }else if newDeaths == 0{
+                    UIHelper.hide(view: newDeathCountLabel)
+                }
+            }else{
+                UIHelper.hide(view: newDeathCountLabel)
+            }
+            
         }
     }
     
     private func setupCell(){
+        newCasesLabelLeadingCostraint.constant = (shadowView.frame.width/2)
+        newDeathCountLeadingConstraint.constant = (rightSidedView.frame.width/2)
         UIHelper.addShadow(to: shadowView)
         UIHelper.addCornerRadius(to: shadowView)
     }
