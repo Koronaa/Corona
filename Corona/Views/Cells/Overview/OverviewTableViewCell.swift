@@ -10,37 +10,36 @@ import UIKit
 
 class OverviewTableViewCell: UITableViewCell {
     
-    
+    @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var rightSidedView: UIView!
     @IBOutlet weak var newDeathCountLabel: UILabel!
     @IBOutlet weak var newCasesCountLabel: UILabel!
-    @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var reportedCasesCountLabel: UILabel!
     @IBOutlet weak var recoveredCountLabel: UILabel!
     @IBOutlet weak var deathCountLabel: UILabel!
     
     
-    var stat:Statistics?{
+    var overViewTableViewCellPresenter:OverviewTableViewCellPresenter!{
         didSet{
             setupCell()
-            reportedCasesCountLabel.text = self.stat!.reportedCasesCount.delimiter
-            recoveredCountLabel.text = self.stat!.recoveredCount.delimiter
-            deathCountLabel.text = self.stat!.deathCount.delimiter
+            reportedCasesCountLabel.text = self.overViewTableViewCellPresenter.reportedCasesCount
+            recoveredCountLabel.text = self.overViewTableViewCellPresenter.recoveredCount
+            deathCountLabel.text = self.overViewTableViewCellPresenter.deathCount.delimiter
             
-            let newCases = self.stat!.newCasesCount
-            let newDeaths = self.stat!.newDeathCount
+            let newCases = self.overViewTableViewCellPresenter.newCasesCount
+            let newDeaths = self.overViewTableViewCellPresenter.newDeathCount
             
             if newCases > 0{
                 UIHelper.show(view: newCasesCountLabel)
-                newCasesCountLabel.text = "(+\(newCases))"
+                newCasesCountLabel.text = "(+\(newCases.delimiter))"
             }else if newCases == 0{
                 UIHelper.hide(view: newCasesCountLabel)
             }
             
-            if self.stat!.deathCount > 0{
+            if self.overViewTableViewCellPresenter.deathCount > 0{
                 if newDeaths > 0{
                     UIHelper.show(view: newDeathCountLabel)
-                    newDeathCountLabel.text = "(+\(newDeaths))"
+                    newDeathCountLabel.text = "(+\(newDeaths.delimiter))"
                 }else if newDeaths == 0{
                     UIHelper.hide(view: newDeathCountLabel)
                 }

@@ -14,7 +14,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noRecordLabel: UILabel!
     
-    var statistics:Statistics?
+    fileprivate var commonPresenter:CommonPresenter!
+    var homePresenter:HomePresenter!
     var refreshControl = UIRefreshControl()
     
     
@@ -23,7 +24,8 @@ class HomeViewController: UIViewController {
         setupRefreshControl()
         setupTableView()
         tableView.reloadData()
-        self.setupUI(statistics: statistics!)
+        commonPresenter = CommonPresenter()
+        self.setupUI(homePresenter: homePresenter)
     }
     
     func setupTableView(){
@@ -39,14 +41,12 @@ class HomeViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
-    func loadStatistics(){
-        let statServiceIMPL = StatServiceIMPL()
-        statServiceIMPL.getStatData { (stat, errorMessage, isRetry) in
+    func loadStatistics(from presenter:CommonPresenter){
+        presenter.loadStatistics { (stats, errorMessage, isRetryAvailable) in
             self.refreshControl.endRefreshing()
-            if let statistics = stat{
-//                print(statistics)
-                self.statistics = statistics
-                self.setupUI(statistics: statistics)
+            if let statistics = stats{
+                self.homePresenter.statistics = statistics
+                self.setupUI(homePresenter: self.homePresenter)
                 self.setupTableView()
                 self.tableView.reloadData()
             }else{
@@ -55,13 +55,9 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func setupUI(statistics:Statistics){
-        let date = statistics.updatedDate
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy h:mm a"
-        dateTimeLabel.text = "Last updated on \(dateFormatter.string(from: date))"
-        
-        if statistics.hospitals.count == 0{
+    func setupUI(homePresenter:HomePresenter){
+        dateTimeLabel.text = homePresenter.date
+        if homePresenter.hospitalCount == 0{
             UIHelper.show(view: noRecordLabel)
         }else{
             UIHelper.hide(view: noRecordLabel)
@@ -69,7 +65,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func refresh() {
-        loadStatistics()
+        loadStatistics(from: self.commonPresenter)
     }
 }
 
@@ -84,10 +80,10 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return 1
         case 1:
-            return self.statistics!.hospitals.count
-        default:()
+            return self.homePresenter.statistics!.hospitals.count
+        default:
+            return 0
         }
-        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,15 +91,16 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         switch section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.OVERVIEW_TV_CELL, for: indexPath) as! OverviewTableViewCell
-            cell.stat = self.statistics
+            cell.overViewTableViewCellPresenter = OverviewTableViewCellPresenter(statistics: self.homePresenter.statistics)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.HOSPITALDATA_TV_CELL, for: indexPath) as! HospitalDataTableViewCell
-            cell.hospital = self.statistics!.hospitals[indexPath.row]
+            let hospitalPresenter = HospitalDataTableViewCellPresenter(hospital: self.homePresenter.statistics!.hospitals[indexPath.row])
+            cell.hospitalDataPresenter = hospitalPresenter
             return cell
-        default:()
+        default:
+            return UITableViewCell()
         }
-        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -113,9 +110,9 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
             return 200.0
         case 1:
             return 213.0
-        default:()
+        default:
+            return 0.0
         }
-        return 0.0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -124,9 +121,9 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
             return "Overall Status"
         case 1:
             return "Hospitals' Overview"
-        default:()
+        default:
+            return nil
         }
-        return ""
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
