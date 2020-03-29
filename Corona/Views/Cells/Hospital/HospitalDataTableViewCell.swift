@@ -9,7 +9,7 @@
 import UIKit
 
 class HospitalDataTableViewCell: UITableViewCell {
-
+    
     
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var hospitalNameLabel: UILabel!
@@ -23,16 +23,16 @@ class HospitalDataTableViewCell: UITableViewCell {
     @IBOutlet weak var rightView: UIView!
     
     
-    var hospital:Hospital?{
+    var hospitalDataPresenter:HospitalDataTableViewCellPresenter!{
         didSet{
             setupCell()
-            hospitalNameLabel.text = self.hospital!.name
-            totaTestedCountLabel.text = self.hospital!.totalTestedCount.description
-            localTestedCountLabel.text = self.hospital!.localTestedCount.description
-            foreignTestedCountLabel.text = self.hospital!.forignTestedCount.description
-            foreignAdmittedCountLabel.text = self.hospital!.forignAdmittedCount.description
-            totalAdmittedCountLabel.text = self.hospital!.totalAdmittedCount.description
-            localAdmittedCountLabel.text = self.hospital!.localAdmittedCount.description
+            hospitalNameLabel.text = self.hospitalDataPresenter.hospitalName
+            totaTestedCountLabel.text = self.hospitalDataPresenter.totalTestedCount
+            localTestedCountLabel.text = self.hospitalDataPresenter.localTestedCount
+            foreignTestedCountLabel.text = self.hospitalDataPresenter.foreignTestedCount
+            foreignAdmittedCountLabel.text = self.hospitalDataPresenter.foreignAdmittedCount
+            totalAdmittedCountLabel.text = self.hospitalDataPresenter.totalAdmittedCount
+            localAdmittedCountLabel.text = self.hospitalDataPresenter.localAdmittedCount
         }
     }
     
