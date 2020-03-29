@@ -9,9 +9,10 @@
 import Foundation
 class CommonPresenter{
     
+    fileprivate let modelLayer = ModelLayer()
+    
     func loadStatistics(onComplete: @escaping (_ stats:Statistics?, _ error:String?,_ isRetry:Bool?)->Void){
-        let statServiceIMPL = StatServiceIMPL()
-        statServiceIMPL.getStatData { (stat, errorMessage, isRetry)  in
+        modelLayer.getStatData { (stat, errorMessage, isRetry)  in
             if let statistics = stat{
                 onComplete(statistics,nil,nil)
             }else{
@@ -19,5 +20,4 @@ class CommonPresenter{
             }
         }
     }
-    
 }

@@ -28,7 +28,7 @@ enum StatRouter{
     }
 }
 
-class StatService{
+class NetworkLayer{
     
     func getStatData(onResponse:onAPIResponse?){
         ServiceManager.APIRequest(url: StatRouter.getStat.url, method: StatRouter.getStat.method) { (response, responseCode) in

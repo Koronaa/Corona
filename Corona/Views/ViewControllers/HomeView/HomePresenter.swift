@@ -9,6 +9,7 @@
 import Foundation
 
 class HomePresenter{
+    
     var statistics:Statistics!
     
     var date:String {
