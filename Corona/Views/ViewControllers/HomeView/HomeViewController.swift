@@ -15,16 +15,26 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var noRecordLabel: UILabel!
     
     fileprivate var commonPresenter:CommonPresenter!
-    var homePresenter:HomePresenter!
-    var refreshControl = UIRefreshControl()
+    fileprivate var homePresenter:HomePresenter!
+    fileprivate var overviewCellMaker:DependencyRegistry.OverviewCellMaker!
+    fileprivate var hospitalCellMaker:DependencyRegistry.HopitalCellMaker!
+    fileprivate var refreshControl = UIRefreshControl()
     
+    func configure(with presenter:HomePresenter,
+                   commonPresenter:CommonPresenter,
+                   overviewCellMaker:@escaping DependencyRegistry.OverviewCellMaker,
+                   hospitalCellMaker:@escaping DependencyRegistry.HopitalCellMaker){
+        self.homePresenter = presenter
+        self.commonPresenter = commonPresenter
+        self.overviewCellMaker = overviewCellMaker
+        self.hospitalCellMaker = hospitalCellMaker
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRefreshControl()
         setupTableView()
         tableView.reloadData()
-        commonPresenter = CommonPresenter()
         self.setupUI(homePresenter: homePresenter)
     }
     
@@ -90,13 +100,12 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         let section = indexPath.section
         switch section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.OVERVIEW_TV_CELL, for: indexPath) as! OverviewTableViewCell
-            cell.overViewTableViewCellPresenter = OverviewTableViewCellPresenter(statistics: self.homePresenter.statistics)
+            let stat = self.homePresenter.statistics
+            let cell = overviewCellMaker(tableView,indexPath,stat!)
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.HOSPITALDATA_TV_CELL, for: indexPath) as! HospitalDataTableViewCell
-            let hospitalPresenter = HospitalDataTableViewCellPresenter(hospital: self.homePresenter.statistics!.hospitals[indexPath.row])
-            cell.hospitalDataPresenter = hospitalPresenter
+            let hospital = self.homePresenter.statistics!.hospitals[indexPath.row]
+            let cell = hospitalCellMaker(tableView,indexPath,hospital)
             return cell
         default:
             return UITableViewCell()

@@ -19,6 +19,7 @@ class ServiceManager{
             Alamofire.request(url, method: method, parameters: params, encoding: encoding!, headers: headers).responseJSON{ response in
                 if let statusCode = response.response?.statusCode{
                     onResponse?(response,statusCode)
+//                    print(response)
                 }
             }
         }else{

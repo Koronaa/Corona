@@ -11,4 +11,6 @@ target 'Corona' do
   pod 'TTGSnackbar'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
+  pod 'Swinject'
+  pod 'SwinjectStoryboard', :git=> 'https://github.com/Swinject/SwinjectStoryboard.git', :tag => '2.2.0'
 end

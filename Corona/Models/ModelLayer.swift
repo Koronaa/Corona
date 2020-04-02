@@ -10,8 +10,13 @@ import Foundation
 import SwiftyJSON
 class ModelLayer{
     
-    fileprivate let networkLayer = NetworkLayer()
-    fileprivate let translationLayer = TranslationLayer()
+    fileprivate let networkLayer:NetworkLayer
+    fileprivate let translationLayer:TranslationLayer
+    
+    init(networkLayer:NetworkLayer,translationLayer:TranslationLayer) {
+        self.networkLayer = networkLayer
+        self.translationLayer = translationLayer
+    }
     
     func getStatData(onCompleted:@escaping (_ stat:Statistics?,_ errorMessage:String?,_ isRetry:Bool)->Void){
         

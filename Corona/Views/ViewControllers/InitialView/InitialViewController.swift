@@ -14,10 +14,15 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     fileprivate var presenter:CommonPresenter!
+    fileprivate var homeViewControllerMaker:DependencyRegistry.HomeViewControllerMaker!
+    
+    func configure(with commonPresenter:CommonPresenter,homeViewControllerMaker:@escaping DependencyRegistry.HomeViewControllerMaker){
+        self.presenter = commonPresenter
+        self.homeViewControllerMaker = homeViewControllerMaker
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = CommonPresenter()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -28,8 +33,7 @@ class InitialViewController: UIViewController {
     private func loadData(from presenter:CommonPresenter){
         presenter.loadStatistics { (stats, errorMessage, isRetryAvailable) in
             if let statisticData = stats{
-                let homeVC:HomeViewController = UIHelper.makeHomeViewController()
-                homeVC.homePresenter = HomePresenter(statistics: statisticData)
+                let homeVC:HomeViewController = self.homeViewControllerMaker(statisticData)
                 homeVC.modalPresentationStyle = .fullScreen
                 self.present(homeVC, animated: true, completion: nil)
             }else{
