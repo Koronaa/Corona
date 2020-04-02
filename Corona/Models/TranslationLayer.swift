@@ -9,7 +9,12 @@
 import Foundation
 import SwiftyJSON
 
-class TranslationLayer{
+
+protocol TranslationLayer {
+    func createStats(from response:JSON,onCompleted: @escaping (_ stats:Statistics) -> Void)
+}
+
+class TranslationLayerIMPL:TranslationLayer{
     
     func createStats(from response:JSON,onCompleted: @escaping (_ stats:Statistics) -> Void){
         var hospitals:[Hospital] = []

@@ -19,7 +19,7 @@ class OverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var deathCountLabel: UILabel!
     
     
-    fileprivate var overViewTableViewCellPresenter:OverviewTableViewCellPresenter!{
+    fileprivate var overViewTableViewCellPresenter:OverviewTableViewCellPresenterIMPL!{
         didSet{
             setupCell()
             reportedCasesCountLabel.text = self.overViewTableViewCellPresenter.reportedCasesCount
@@ -54,7 +54,7 @@ class OverviewTableViewCell: UITableViewCell {
         UIHelper.addCornerRadius(to: shadowView)
     }
     
-    public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with presenter: OverviewTableViewCellPresenter) -> OverviewTableViewCell {
+    public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with presenter: OverviewTableViewCellPresenterIMPL) -> OverviewTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.OVERVIEW_TV_CELL, for: indexPath) as! OverviewTableViewCell
         cell.overViewTableViewCellPresenter = presenter
         return cell

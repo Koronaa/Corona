@@ -14,14 +14,14 @@ extension SwinjectStoryboard{
     
     public class func setup(){
         if AppDelegate.dependencyRegistry == nil{
-            AppDelegate.dependencyRegistry = DependencyRegistry(container: defaultContainer)
+            AppDelegate.dependencyRegistry = DependencyRegistryIMPL(container: defaultContainer)
         }
         
-        let dependencyRegistry:DependencyRegistry = AppDelegate.dependencyRegistry
+        let dependencyRegistry:DependencyRegistryIMPL = AppDelegate.dependencyRegistry
         
         func main(){
             dependencyRegistry.container.storyboardInitCompleted(InitialViewController.self) { (resolver, viewController) in
-                let commonPresenter = resolver.resolve(CommonPresenter.self)
+                let commonPresenter = resolver.resolve(CommonPresenterIMPL.self)
                 viewController.configure(with: commonPresenter!, homeViewControllerMaker: dependencyRegistry.makeHomeViewController)
             }
         }

@@ -8,7 +8,12 @@
 
 import Foundation
 
-class HomePresenter{
+protocol HomePresenter {
+    var date:String {get}
+    var hospitalCount:Int {get}
+}
+
+class HomePresenterIMPL:HomePresenter{
     
     var statistics:Statistics!
     

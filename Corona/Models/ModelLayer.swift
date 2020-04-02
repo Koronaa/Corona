@@ -8,12 +8,17 @@
 
 import Foundation
 import SwiftyJSON
-class ModelLayer{
+
+protocol ModelLayer {
+    func getStatData(onCompleted:@escaping (_ stat:Statistics?,_ errorMessage:String?,_ isRetry:Bool)->Void)
+}
+
+class ModelLayerIMPL:ModelLayer{
     
-    fileprivate let networkLayer:NetworkLayer
-    fileprivate let translationLayer:TranslationLayer
+    fileprivate let networkLayer:NetworkLayerIMPL
+    fileprivate let translationLayer:TranslationLayerIMPL
     
-    init(networkLayer:NetworkLayer,translationLayer:TranslationLayer) {
+    init(networkLayer:NetworkLayerIMPL,translationLayer:TranslationLayerIMPL) {
         self.networkLayer = networkLayer
         self.translationLayer = translationLayer
     }

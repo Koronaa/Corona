@@ -8,7 +8,17 @@
 
 import Foundation
 
-class HospitalDataTableViewCellPresenter{
+protocol HospitalDataTableViewCellPresenter {
+    var hospitalName:String {get}
+    var totalTestedCount:String {get}
+    var localTestedCount:String {get}
+    var foreignTestedCount:String {get}
+    var foreignAdmittedCount:String {get}
+    var totalAdmittedCount:String {get}
+    var localAdmittedCount:String {get}
+}
+
+class HospitalDataTableViewCellPresenterIMPL:HospitalDataTableViewCellPresenter{
     var hospital:Hospital!
     
     var hospitalName:String {return hospital.name}

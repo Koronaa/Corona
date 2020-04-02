@@ -8,7 +8,15 @@
 
 import Foundation
 
-class OverviewTableViewCellPresenter{
+protocol OverviewTableViewCellPresenter {
+    var newDeathCount:Int {get}
+    var newCasesCount:Int {get}
+    var reportedCasesCount:String {get}
+    var recoveredCount:String {get}
+    var deathCount:Int {get}
+}
+
+class OverviewTableViewCellPresenterIMPL:OverviewTableViewCellPresenter{
     
     var statistics:Statistics!
     

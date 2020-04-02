@@ -13,10 +13,10 @@ class InitialViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    fileprivate var presenter:CommonPresenter!
-    fileprivate var homeViewControllerMaker:DependencyRegistry.HomeViewControllerMaker!
+    fileprivate var presenter:CommonPresenterIMPL!
+    fileprivate var homeViewControllerMaker:DependencyRegistryIMPL.HomeViewControllerMaker!
     
-    func configure(with commonPresenter:CommonPresenter,homeViewControllerMaker:@escaping DependencyRegistry.HomeViewControllerMaker){
+    func configure(with commonPresenter:CommonPresenterIMPL,homeViewControllerMaker:@escaping DependencyRegistryIMPL.HomeViewControllerMaker){
         self.presenter = commonPresenter
         self.homeViewControllerMaker = homeViewControllerMaker
     }
@@ -30,7 +30,7 @@ class InitialViewController: UIViewController {
         loadData(from: presenter)
     }
     
-    private func loadData(from presenter:CommonPresenter){
+    private func loadData(from presenter:CommonPresenterIMPL){
         presenter.loadStatistics { (stats, errorMessage, isRetryAvailable) in
             if let statisticData = stats{
                 let homeVC:HomeViewController = self.homeViewControllerMaker(statisticData)

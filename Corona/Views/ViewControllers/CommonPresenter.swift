@@ -7,11 +7,16 @@
 //
 
 import Foundation
-class CommonPresenter{
+
+protocol CommonPresenter {
+    func loadStatistics(onComplete: @escaping (_ stats:Statistics?, _ error:String?,_ isRetry:Bool?)->Void)
+}
+
+class CommonPresenterIMPL:CommonPresenter{
     
-    fileprivate let modelLayer:ModelLayer
+    fileprivate let modelLayer:ModelLayerIMPL
     
-    init(modelLayer:ModelLayer) {
+    init(modelLayer:ModelLayerIMPL) {
         self.modelLayer = modelLayer
     }
     

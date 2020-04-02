@@ -14,16 +14,16 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noRecordLabel: UILabel!
     
-    fileprivate var commonPresenter:CommonPresenter!
-    fileprivate var homePresenter:HomePresenter!
-    fileprivate var overviewCellMaker:DependencyRegistry.OverviewCellMaker!
-    fileprivate var hospitalCellMaker:DependencyRegistry.HopitalCellMaker!
+    fileprivate var commonPresenter:CommonPresenterIMPL!
+    fileprivate var homePresenter:HomePresenterIMPL!
+    fileprivate var overviewCellMaker:DependencyRegistryIMPL.OverviewCellMaker!
+    fileprivate var hospitalCellMaker:DependencyRegistryIMPL.HopitalCellMaker!
     fileprivate var refreshControl = UIRefreshControl()
     
-    func configure(with presenter:HomePresenter,
-                   commonPresenter:CommonPresenter,
-                   overviewCellMaker:@escaping DependencyRegistry.OverviewCellMaker,
-                   hospitalCellMaker:@escaping DependencyRegistry.HopitalCellMaker){
+    func configure(with presenter:HomePresenterIMPL,
+                   commonPresenter:CommonPresenterIMPL,
+                   overviewCellMaker:@escaping DependencyRegistryIMPL.OverviewCellMaker,
+                   hospitalCellMaker:@escaping DependencyRegistryIMPL.HopitalCellMaker){
         self.homePresenter = presenter
         self.commonPresenter = commonPresenter
         self.overviewCellMaker = overviewCellMaker
@@ -51,7 +51,7 @@ class HomeViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
-    func loadStatistics(from presenter:CommonPresenter){
+    func loadStatistics(from presenter:CommonPresenterIMPL){
         presenter.loadStatistics { (stats, errorMessage, isRetryAvailable) in
             self.refreshControl.endRefreshing()
             if let statistics = stats{
@@ -65,7 +65,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func setupUI(homePresenter:HomePresenter){
+    func setupUI(homePresenter:HomePresenterIMPL){
         dateTimeLabel.text = homePresenter.date
         if homePresenter.hospitalCount == 0{
             UIHelper.show(view: noRecordLabel)

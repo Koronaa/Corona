@@ -23,7 +23,7 @@ class HospitalDataTableViewCell: UITableViewCell {
     @IBOutlet weak var rightView: UIView!
     
     
-    fileprivate var hospitalDataPresenter:HospitalDataTableViewCellPresenter!{
+    fileprivate var hospitalDataPresenter:HospitalDataTableViewCellPresenterIMPL!{
         didSet{
             setupCell()
             hospitalNameLabel.text = self.hospitalDataPresenter.hospitalName
@@ -46,7 +46,7 @@ class HospitalDataTableViewCell: UITableViewCell {
         UIHelper.addShadow(to: rightView)
     }
     
-    public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with presenter: HospitalDataTableViewCellPresenter) -> HospitalDataTableViewCell {
+    public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with presenter: HospitalDataTableViewCellPresenterIMPL) -> HospitalDataTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.HOSPITALDATA_TV_CELL, for: indexPath) as! HospitalDataTableViewCell
         cell.hospitalDataPresenter = presenter
         return cell
