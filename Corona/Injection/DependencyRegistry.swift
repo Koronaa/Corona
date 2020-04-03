@@ -11,6 +11,10 @@ import Swinject
 import SwinjectStoryboard
 
 protocol DependencyRegistry {
+    
+    var container:Container {get}
+    var navigationCoordinator:NavigationCoordinatorIMPL! {get}
+    
     typealias HomeViewControllerMaker = (Statistics) -> HomeViewController
     func makeHomeViewController(with statistics:Statistics) -> HomeViewController
     
@@ -23,6 +27,7 @@ protocol DependencyRegistry {
 
 class DependencyRegistryIMPL:DependencyRegistry{
     
+    var navigationCoordinator: NavigationCoordinatorIMPL!
     var container:Container
     
     init(container:Container) {
@@ -43,6 +48,10 @@ class DependencyRegistryIMPL:DependencyRegistry{
         container.register(ModelLayerIMPL.self){resolver in
             ModelLayerIMPL(networkLayer: resolver.resolve(NetworkLayerIMPL.self)!, translationLayer: resolver.resolve(TranslationLayerIMPL.self)!)
         }.inObjectScope(.container)
+        
+        container.register(NavigationCoordinatorIMPL.self){(resolver,rootViewController:UIViewController) in
+            return NavigationCoordinatorIMPL(with: rootViewController, registry: self)
+        }.inObjectScope(.container)
     }
     
     func registerPresenters(){
@@ -62,23 +71,25 @@ class DependencyRegistryIMPL:DependencyRegistry{
         }
     }
     
-    typealias HomeViewControllerMaker = (Statistics) -> HomeViewController
     func makeHomeViewController(with statistics:Statistics) -> HomeViewController{
         return container.resolve(HomeViewController.self, argument: statistics)!
     }
     
-    typealias OverviewCellMaker = (UITableView,IndexPath,Statistics) -> OverviewTableViewCell
     func makeOverviewCell(for tableView: UITableView, at indexPath: IndexPath,with statistics:Statistics) -> OverviewTableViewCell{
         let presenter = container.resolve(OverviewTableViewCellPresenterIMPL.self, argument: statistics)!
         let cell = OverviewTableViewCell.dequeue(from: tableView, for: indexPath, with: presenter)
         return cell
     }
     
-    typealias HopitalCellMaker = (UITableView,IndexPath,Hospital) -> HospitalDataTableViewCell
     func makeHospitalDataCell(for tableView: UITableView, at indexPath: IndexPath,with hospital:Hospital) -> HospitalDataTableViewCell{
         let presenter = container.resolve(HospitalDataTableViewCellPresenterIMPL.self, argument: hospital)!
         let cell = HospitalDataTableViewCell.dequeue(from: tableView, for: indexPath, with: presenter)
         return cell
+    }
+    
+    func makeRootNavigationCoordinator(rootViewController:UIViewController) -> NavigationCoordinatorIMPL{
+        navigationCoordinator = container.resolve(NavigationCoordinatorIMPL.self,argument: rootViewController)
+        return navigationCoordinator
     }
     
 }

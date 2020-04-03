@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D1719642437171200EF09B3 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1719632437171200EF09B3 /* NavigationCoordinator.swift */; };
 		3D17E187243050E800319088 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E186243050E800319088 /* HomePresenter.swift */; };
 		3D17E18B2430539400319088 /* HospitalDataTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E18A2430539400319088 /* HospitalDataTableViewCellPresenter.swift */; };
 		3D17E18D2430821200319088 /* OverviewTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E18C2430821200319088 /* OverviewTableViewCellPresenter.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D1719632437171200EF09B3 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		3D17E186243050E800319088 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		3D17E18A2430539400319088 /* HospitalDataTableViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDataTableViewCellPresenter.swift; sourceTree = "<group>"; };
 		3D17E18C2430821200319088 /* OverviewTableViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTableViewCellPresenter.swift; sourceTree = "<group>"; };
@@ -89,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D171962243716EC00EF09B3 /* NavigationCoordinators */ = {
+			isa = PBXGroup;
+			children = (
+				3D1719632437171200EF09B3 /* NavigationCoordinator.swift */,
+			);
+			path = NavigationCoordinators;
+			sourceTree = "<group>";
+		};
 		3D17E1882430536D00319088 /* Overview */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +166,7 @@
 		3D830E4B2421F2490017F7DC /* Corona */ = {
 			isa = PBXGroup;
 			children = (
+				3D171962243716EC00EF09B3 /* NavigationCoordinators */,
 				3D356890243487E000CE9CAA /* Injection */,
 				3D8F295E242757CB0061B372 /* Corona.entitlements */,
 				3D830E71242210150017F7DC /* Network */,
@@ -376,6 +387,7 @@
 				3D17E18B2430539400319088 /* HospitalDataTableViewCellPresenter.swift in Sources */,
 				3D830E512421F2490017F7DC /* HomeViewController.swift in Sources */,
 				3D830E7B2422142C0017F7DC /* ModelLayer.swift in Sources */,
+				3D1719642437171200EF09B3 /* NavigationCoordinator.swift in Sources */,
 				3D17E18D2430821200319088 /* OverviewTableViewCellPresenter.swift in Sources */,
 				3D3568942434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift in Sources */,
 				3D3568922434A0D500CE9CAA /* DependencyRegistry.swift in Sources */,

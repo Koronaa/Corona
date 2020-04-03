@@ -14,11 +14,11 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     fileprivate var presenter:CommonPresenterIMPL!
-    fileprivate var homeViewControllerMaker:DependencyRegistryIMPL.HomeViewControllerMaker!
+    fileprivate weak var navigationCoordinator:NavigationCoordinatorIMPL?
     
-    func configure(with commonPresenter:CommonPresenterIMPL,homeViewControllerMaker:@escaping DependencyRegistryIMPL.HomeViewControllerMaker){
+    func configure(with commonPresenter:CommonPresenterIMPL,navigationCoordinator:NavigationCoordinatorIMPL){
         self.presenter = commonPresenter
-        self.homeViewControllerMaker = homeViewControllerMaker
+        self.navigationCoordinator = navigationCoordinator
     }
     
     override func viewDidLoad() {
@@ -33,9 +33,8 @@ class InitialViewController: UIViewController {
     private func loadData(from presenter:CommonPresenterIMPL){
         presenter.loadStatistics { (stats, errorMessage, isRetryAvailable) in
             if let statisticData = stats{
-                let homeVC:HomeViewController = self.homeViewControllerMaker(statisticData)
-                homeVC.modalPresentationStyle = .fullScreen
-                self.present(homeVC, animated: true, completion: nil)
+                let args = ["stats":statisticData]
+                self.navigationCoordinator?.next(arguments: args)
             }else{
                 let error = errorMessage ?? "Something went wrong while retrieving data"
                 if isRetryAvailable ?? false{

@@ -21,8 +21,12 @@ extension SwinjectStoryboard{
         
         func main(){
             dependencyRegistry.container.storyboardInitCompleted(InitialViewController.self) { (resolver, viewController) in
+                
+                let coordinator:NavigationCoordinatorIMPL = dependencyRegistry.makeRootNavigationCoordinator(rootViewController: viewController)
+                AppDelegate.navigationCoordinator = coordinator
+                
                 let commonPresenter = resolver.resolve(CommonPresenterIMPL.self)
-                viewController.configure(with: commonPresenter!, homeViewControllerMaker: dependencyRegistry.makeHomeViewController)
+                viewController.configure(with: commonPresenter!, navigationCoordinator: coordinator)
             }
         }
         main()
