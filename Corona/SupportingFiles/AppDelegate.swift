@@ -13,6 +13,7 @@ import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
     
+    var window: UIWindow?
     static var dependencyRegistry:DependencyRegistryIMPL!
     static var navigationCoordinator:NavigationCoordinator!
     
@@ -45,12 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
     }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print(userInfo)
-        completionHandler(UIBackgroundFetchResult.newData)
-    }
-    
+
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         print(userInfo)
     }
