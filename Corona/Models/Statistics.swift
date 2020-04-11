@@ -16,6 +16,7 @@ struct Statistics {
     var recoveredCount:Int
     var newCasesCount:Int
     var newDeathCount:Int
+    var activeCasesCount:Int
     var hospitals:[Hospital]
 
 }

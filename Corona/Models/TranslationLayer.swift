@@ -24,6 +24,7 @@ class TranslationLayerIMPL:TranslationLayer{
                 let deaths = statData["local_deaths"]?.int,
                 let recovered = statData["local_recovered"]?.int,
                 let newCases = statData["local_new_cases"]?.int,
+                let activeCases = statData["local_active_cases"]?.int,
                 let newDeaths = statData["local_new_deaths"]?.int  {
                 
                 let dateFormatter = DateFormatter()
@@ -48,14 +49,14 @@ class TranslationLayerIMPL:TranslationLayer{
                                 }
                             }
                         }
-                        let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, newCasesCount: newCases, newDeathCount: newDeaths, hospitals: hospitals)
+                        let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, newCasesCount: newCases, newDeathCount: newDeaths, activeCasesCount: activeCases, hospitals: hospitals)
                         onCompleted(statData)
                     }else{
-                        let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, newCasesCount: newCases, newDeathCount: newDeaths, hospitals: hospitals)
+                        let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, newCasesCount: newCases, newDeathCount: newDeaths, activeCasesCount: activeCases, hospitals: hospitals)
                         onCompleted(statData)
                     }
                 }else{
-                    let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, newCasesCount: newCases, newDeathCount: newDeaths, hospitals: hospitals)
+                    let statData = Statistics(updatedDate: date, reportedCasesCount: totalCases, deathCount: deaths, recoveredCount: recovered, newCasesCount: newCases, newDeathCount: newDeaths, activeCasesCount: activeCases, hospitals: hospitals)
                     onCompleted(statData)
                 }
                 

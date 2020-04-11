@@ -11,12 +11,12 @@ import UIKit
 class OverviewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var shadowView: UIView!
-    @IBOutlet weak var rightSidedView: UIView!
     @IBOutlet weak var newDeathCountLabel: UILabel!
     @IBOutlet weak var newCasesCountLabel: UILabel!
     @IBOutlet weak var reportedCasesCountLabel: UILabel!
     @IBOutlet weak var recoveredCountLabel: UILabel!
     @IBOutlet weak var deathCountLabel: UILabel!
+    @IBOutlet weak var activeCasesCountLabel: UILabel!
     
     
     fileprivate var overViewTableViewCellViewModel:OverviewTableViewCellViewModelIMPL!{
@@ -25,6 +25,7 @@ class OverviewTableViewCell: UITableViewCell {
             reportedCasesCountLabel.text = self.overViewTableViewCellViewModel.reportedCasesCount
             recoveredCountLabel.text = self.overViewTableViewCellViewModel.recoveredCount
             deathCountLabel.text = self.overViewTableViewCellViewModel.deathCount.delimiter
+            activeCasesCountLabel.text = self.overViewTableViewCellViewModel.activeCasesCount.delimiter
             
             let newCases = self.overViewTableViewCellViewModel.newCasesCount
             let newDeaths = self.overViewTableViewCellViewModel.newDeathCount

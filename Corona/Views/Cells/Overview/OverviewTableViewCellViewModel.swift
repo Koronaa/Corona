@@ -25,6 +25,7 @@ class OverviewTableViewCellViewModelIMPL:OverviewTableViewCellViewModel{
     var reportedCasesCount:String {return statistics.reportedCasesCount.delimiter}
     var recoveredCount:String {return statistics.recoveredCount.delimiter}
     var deathCount:Int {return statistics.deathCount}
+    var activeCasesCount:Int {return statistics.activeCasesCount}
     
     init(statistics:Statistics) {
         self.statistics = statistics
