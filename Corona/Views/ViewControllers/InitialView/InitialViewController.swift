@@ -8,6 +8,7 @@
 
 import UIKit
 import TTGSnackbar
+import RxSwift
 
 class InitialViewController: UIViewController {
     
@@ -15,6 +16,7 @@ class InitialViewController: UIViewController {
     
     fileprivate var presenter:CommonPresenterIMPL!
     fileprivate weak var navigationCoordinator:NavigationCoordinatorIMPL?
+    fileprivate var bag = DisposeBag()
     
     func configure(with commonPresenter:CommonPresenterIMPL,navigationCoordinator:NavigationCoordinatorIMPL){
         self.presenter = commonPresenter
@@ -31,18 +33,23 @@ class InitialViewController: UIViewController {
     }
     
     private func loadData(from presenter:CommonPresenterIMPL){
-        presenter.loadStatistics { (stats, errorMessage, isRetryAvailable) in
-            if let statisticData = stats{
-                let args = ["stats":statisticData]
-                self.navigationCoordinator?.next(arguments: args)
-            }else{
-                let error = errorMessage ?? "Something went wrong while retrieving data"
-                if isRetryAvailable ?? false{
-                    self.showRetrySnack(message: error)
-                }else{
-                    UIHelper.makeSnackBar(message: error)
-                }
-            }
+        
+        presenter.loadStatistics { statRelay in
+            statRelay.asObservable()
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { (stats, errorMessage, isRetryAvailable) in
+                    guard let statistics = stats else{
+                        let error = errorMessage ?? "Something went wrong while retrieving data"
+                        if isRetryAvailable ?? false{
+                            self.showRetrySnack(message: error)
+                        }else{
+                            UIHelper.makeSnackBar(message: error)
+                        }
+                        return
+                    }
+                    let args = ["stats":statistics]
+                    self.navigationCoordinator?.next(arguments: args)
+                }).disposed(by: self.bag)
         }
     }
     

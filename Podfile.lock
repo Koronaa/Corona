@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.9.1)
+  - Differentiator (4.0.1)
   - Firebase/Analytics (6.16.0):
     - Firebase/Core
   - Firebase/Core (6.16.0):
@@ -85,6 +86,21 @@ PODS:
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
   - Protobuf (3.11.2)
+  - RxAlamofire (5.1.0):
+    - RxAlamofire/Core (= 5.1.0)
+  - RxAlamofire/Core (5.1.0):
+    - Alamofire (~> 4.8)
+    - RxSwift (~> 5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
   - SwiftyJSON (5.0.0)
   - Swinject (2.7.1)
   - SwinjectStoryboard (2.2.0):
@@ -95,6 +111,10 @@ DEPENDENCIES:
   - Alamofire
   - Firebase/Analytics
   - Firebase/Messaging
+  - RxAlamofire
+  - RxCocoa
+  - RxDataSources
+  - RxSwift
   - SwiftyJSON
   - Swinject
   - SwinjectStoryboard (from `https://github.com/Swinject/SwinjectStoryboard.git`, tag `2.2.0`)
@@ -103,6 +123,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Differentiator
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -119,6 +140,11 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+    - RxAlamofire
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
     - SwiftyJSON
     - Swinject
     - TTGSnackbar
@@ -135,6 +161,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Firebase: 497158b816d0a86fc31babbd05546fcd7e6083ff
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
   FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
@@ -151,11 +178,16 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
+  RxAlamofire: a2d7621de4c23a0c6e7b476b504acc32838ee341
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
   TTGSnackbar: b1da26bd1e791048b08d69e9efb033db0e22d310
 
-PODFILE CHECKSUM: 920fc82cedd63bb5f37f85a9eb348fee1f6adf95
+PODFILE CHECKSUM: 3a8a43721eacee51ace7e329acee505d14da8322
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.1

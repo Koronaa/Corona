@@ -7,7 +7,11 @@ target 'Corona' do
 
   # Pods for Corona
   pod 'Alamofire'
+  pod 'RxAlamofire'
   pod 'SwiftyJSON'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxDataSources'
   pod 'TTGSnackbar'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'

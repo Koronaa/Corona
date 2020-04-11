@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import RxRelay
 
 protocol CommonPresenter {
-    func loadStatistics(onComplete: @escaping (_ stats:Statistics?, _ error:String?,_ isRetry:Bool?)->Void)
+    func loadStatistics(onComplete: @escaping (_ stats:BehaviorRelay<(Statistics?,String?,Bool?)>)->Void)
 }
 
 class CommonPresenterIMPL:CommonPresenter{
@@ -20,13 +21,11 @@ class CommonPresenterIMPL:CommonPresenter{
         self.modelLayer = modelLayer
     }
     
-    func loadStatistics(onComplete: @escaping (_ stats:Statistics?, _ error:String?,_ isRetry:Bool?)->Void){
-        modelLayer.getStatData { (stat, errorMessage, isRetry)  in
-            if let statistics = stat{
-                onComplete(statistics,nil,nil)
-            }else{
-                onComplete(nil,errorMessage,isRetry)
-            }
+    func loadStatistics(onComplete: @escaping (BehaviorRelay<(Statistics?, String?, Bool?)>) -> Void) {
+        let statRelay = BehaviorRelay<(Statistics?, String?, Bool?)>(value: (nil,nil,nil))
+        modelLayer.getStatData { (stat, errorMessage, isRetry) in
+            statRelay.accept((stat,errorMessage,isRetry))
+            onComplete(statRelay)
         }
     }
 }

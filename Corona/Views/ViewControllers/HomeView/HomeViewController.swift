@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class HomeViewController: UIViewController {
     
@@ -19,6 +21,7 @@ class HomeViewController: UIViewController {
     fileprivate var overviewCellMaker:DependencyRegistryIMPL.OverviewCellMaker!
     fileprivate var hospitalCellMaker:DependencyRegistryIMPL.HopitalCellMaker!
     fileprivate var refreshControl = UIRefreshControl()
+    fileprivate var bag = DisposeBag()
     
     func configure(with presenter:HomePresenterIMPL,
                    commonPresenter:CommonPresenterIMPL,
@@ -52,16 +55,21 @@ class HomeViewController: UIViewController {
     }
     
     func loadStatistics(from presenter:CommonPresenterIMPL){
-        presenter.loadStatistics { (stats, errorMessage, isRetryAvailable) in
+        
+        presenter.loadStatistics { statRelay in
             self.refreshControl.endRefreshing()
-            if let statistics = stats{
-                self.homePresenter.statistics = statistics
-                self.setupUI(homePresenter: self.homePresenter)
-                self.setupTableView()
-                self.tableView.reloadData()
-            }else{
-                UIHelper.makeSnackBar(message: errorMessage ?? "Error", type: .ERROR)
-            }
+            statRelay.asObservable()
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { (stats, errorMessage, _) in
+                    guard let statistics = stats else{
+                        UIHelper.makeSnackBar(message: errorMessage ?? "Error", type: .ERROR)
+                        return
+                    }
+                    self.homePresenter.statistics = statistics
+                    self.setupUI(homePresenter: self.homePresenter)
+                    self.setupTableView()
+                    self.tableView.reloadData()
+                }).disposed(by: self.bag)
         }
     }
     
