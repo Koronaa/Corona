@@ -14,12 +14,12 @@ class InitialViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    fileprivate var presenter:CommonViewModelIMPL!
+    fileprivate var viewModel:CommonViewModelIMPL!
     fileprivate weak var navigationCoordinator:NavigationCoordinatorIMPL?
     fileprivate var bag = DisposeBag()
     
-    func configure(with commonPresenter:CommonViewModelIMPL,navigationCoordinator:NavigationCoordinatorIMPL){
-        self.presenter = commonPresenter
+    func configure(with commonViewModel:CommonViewModelIMPL,navigationCoordinator:NavigationCoordinatorIMPL){
+        self.viewModel = commonViewModel
         self.navigationCoordinator = navigationCoordinator
     }
     
@@ -29,12 +29,11 @@ class InitialViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadData(from: presenter)
+        loadData(from: viewModel)
     }
     
-    private func loadData(from presenter:CommonViewModelIMPL){
-        
-        presenter.loadStatistics { statRelay in
+    private func loadData(from viewModel:CommonViewModelIMPL){
+        viewModel.loadStatistics { statRelay in
             statRelay.asObservable()
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { (stats, errorMessage, isRetryAvailable) in
@@ -60,7 +59,7 @@ class InitialViewController: UIViewController {
                                    actionBlock: { (snackbar) in
                                     snackbar.dismiss()
                                     self.activityIndicator.startAnimating()
-                                    self.loadData(from: self.presenter)
+                                    self.loadData(from: self.viewModel)
                                     
         })
         snackbar.backgroundColor = UIColor(displayP3Red: 231/255, green: 76/255, blue: 60/255, alpha: 1)

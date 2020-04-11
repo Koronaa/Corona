@@ -36,7 +36,7 @@ class DependencyRegistryIMPL:DependencyRegistry{
         Container.loggingFunction = nil
         
         registerDependencies()
-        registerPresenters()
+        registerViewModels()
         registerViewControllers()
     }
     
@@ -54,19 +54,19 @@ class DependencyRegistryIMPL:DependencyRegistry{
         }.inObjectScope(.container)
     }
     
-    func registerPresenters(){
+    func registerViewModels(){
         container.register(HomeViewModelIMPL.self) {(resolover , stats:Statistics) in HomeViewModelIMPL(statistics: stats)}
         container.register(CommonViewModelIMPL.self){resolover in CommonViewModelIMPL(modelLayer: resolover.resolve(ModelLayerIMPL.self)!)}
-        container.register(OverviewTableViewCellPresenterIMPL.self){(resolover , stats:Statistics) in OverviewTableViewCellPresenterIMPL(statistics: stats)}
-        container.register(HospitalDataTableViewCellPresenterIMPL.self) {(resolver, hospital:Hospital) in HospitalDataTableViewCellPresenterIMPL(hospital: hospital)}
+        container.register(OverviewTableViewCellViewModelIMPL.self){(resolover , stats:Statistics) in OverviewTableViewCellViewModelIMPL(statistics: stats)}
+        container.register(HospitalDataTableViewCellViewModelIMPL.self) {(resolver, hospital:Hospital) in HospitalDataTableViewCellViewModelIMPL(hospital: hospital)}
     }
     
     func registerViewControllers(){
         container.register(HomeViewController.self) {(resolver, stat:Statistics) in
-            let homePresenter = resolver.resolve(HomeViewModelIMPL.self, argument: stat)
-            let commonPresenter = resolver.resolve(CommonViewModelIMPL.self)
+            let homeViewModel = resolver.resolve(HomeViewModelIMPL.self, argument: stat)
+            let commonViewModel = resolver.resolve(CommonViewModelIMPL.self)
             let homeVC = UIHelper.makeHomeViewController()
-            homeVC.configure(with: homePresenter!, commonPresenter: commonPresenter!, overviewCellMaker: self.makeOverviewCell, hospitalCellMaker: self.makeHospitalDataCell)
+            homeVC.configure(with: homeViewModel!, commonViewModel: commonViewModel!, overviewCellMaker: self.makeOverviewCell, hospitalCellMaker: self.makeHospitalDataCell)
             return homeVC
         }
     }
@@ -76,14 +76,14 @@ class DependencyRegistryIMPL:DependencyRegistry{
     }
     
     func makeOverviewCell(for tableView: UITableView, at indexPath: IndexPath,with statistics:Statistics) -> OverviewTableViewCell{
-        let presenter = container.resolve(OverviewTableViewCellPresenterIMPL.self, argument: statistics)!
-        let cell = OverviewTableViewCell.dequeue(from: tableView, for: indexPath, with: presenter)
+        let viewModel = container.resolve(OverviewTableViewCellViewModelIMPL.self, argument: statistics)!
+        let cell = OverviewTableViewCell.dequeue(from: tableView, for: indexPath, with: viewModel)
         return cell
     }
     
     func makeHospitalDataCell(for tableView: UITableView, at indexPath: IndexPath,with hospital:Hospital) -> HospitalDataTableViewCell{
-        let presenter = container.resolve(HospitalDataTableViewCellPresenterIMPL.self, argument: hospital)!
-        let cell = HospitalDataTableViewCell.dequeue(from: tableView, for: indexPath, with: presenter)
+        let viewModel = container.resolve(HospitalDataTableViewCellViewModelIMPL.self, argument: hospital)!
+        let cell = HospitalDataTableViewCell.dequeue(from: tableView, for: indexPath, with: viewModel)
         return cell
     }
     

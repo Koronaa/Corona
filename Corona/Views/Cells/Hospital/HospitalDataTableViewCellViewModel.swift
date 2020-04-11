@@ -1,5 +1,5 @@
 //
-//  HospitalDataTableViewCellPresenter.swift
+//  HospitalDataTableViewCellViewModel.swift
 //  Corona
 //
 //  Created by Sajith Konara on 3/29/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol HospitalDataTableViewCellPresenter {
+protocol HospitalDataTableViewCellViewModel {
     var hospitalName:String {get}
     var totalTestedCount:String {get}
     var localTestedCount:String {get}
@@ -18,7 +18,7 @@ protocol HospitalDataTableViewCellPresenter {
     var localAdmittedCount:String {get}
 }
 
-class HospitalDataTableViewCellPresenterIMPL:HospitalDataTableViewCellPresenter{
+class HospitalDataTableViewCellViewModelIMPL:HospitalDataTableViewCellViewModel{
     var hospital:Hospital!
     
     var hospitalName:String {return hospital.name}

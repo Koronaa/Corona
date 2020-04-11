@@ -19,15 +19,15 @@ class OverviewTableViewCell: UITableViewCell {
     @IBOutlet weak var deathCountLabel: UILabel!
     
     
-    fileprivate var overViewTableViewCellPresenter:OverviewTableViewCellPresenterIMPL!{
+    fileprivate var overViewTableViewCellViewModel:OverviewTableViewCellViewModelIMPL!{
         didSet{
             setupCell()
-            reportedCasesCountLabel.text = self.overViewTableViewCellPresenter.reportedCasesCount
-            recoveredCountLabel.text = self.overViewTableViewCellPresenter.recoveredCount
-            deathCountLabel.text = self.overViewTableViewCellPresenter.deathCount.delimiter
+            reportedCasesCountLabel.text = self.overViewTableViewCellViewModel.reportedCasesCount
+            recoveredCountLabel.text = self.overViewTableViewCellViewModel.recoveredCount
+            deathCountLabel.text = self.overViewTableViewCellViewModel.deathCount.delimiter
             
-            let newCases = self.overViewTableViewCellPresenter.newCasesCount
-            let newDeaths = self.overViewTableViewCellPresenter.newDeathCount
+            let newCases = self.overViewTableViewCellViewModel.newCasesCount
+            let newDeaths = self.overViewTableViewCellViewModel.newDeathCount
             
             if newCases > 0{
                 UIHelper.show(view: newCasesCountLabel)
@@ -36,7 +36,7 @@ class OverviewTableViewCell: UITableViewCell {
                 UIHelper.hide(view: newCasesCountLabel)
             }
             
-            if self.overViewTableViewCellPresenter.deathCount > 0{
+            if self.overViewTableViewCellViewModel.deathCount > 0{
                 if newDeaths > 0{
                     UIHelper.show(view: newDeathCountLabel)
                     newDeathCountLabel.text = "(+\(newDeaths.delimiter))"
@@ -54,9 +54,9 @@ class OverviewTableViewCell: UITableViewCell {
         UIHelper.addCornerRadius(to: shadowView)
     }
     
-    public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with presenter: OverviewTableViewCellPresenterIMPL) -> OverviewTableViewCell {
+    public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with viewModel: OverviewTableViewCellViewModelIMPL) -> OverviewTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.OVERVIEW_TV_CELL, for: indexPath) as! OverviewTableViewCell
-        cell.overViewTableViewCellPresenter = presenter
+        cell.overViewTableViewCellViewModel = viewModel
         return cell
     }
 }

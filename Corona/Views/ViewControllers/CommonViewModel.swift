@@ -1,5 +1,5 @@
 //
-//  InitialPresenter.swift
+//  CommonViewModel.swift
 //  Corona
 //
 //  Created by Sajith Konara on 3/29/20.

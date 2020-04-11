@@ -1,5 +1,5 @@
 //
-//  OverviewTableViewCellPresenter.swift
+//  OverviewTableViewCellViewModel.swift
 //  Corona
 //
 //  Created by Sajith Konara on 3/29/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol OverviewTableViewCellPresenter {
+protocol OverviewTableViewCellViewModel {
     var newDeathCount:Int {get}
     var newCasesCount:Int {get}
     var reportedCasesCount:String {get}
@@ -16,7 +16,7 @@ protocol OverviewTableViewCellPresenter {
     var deathCount:Int {get}
 }
 
-class OverviewTableViewCellPresenterIMPL:OverviewTableViewCellPresenter{
+class OverviewTableViewCellViewModelIMPL:OverviewTableViewCellViewModel{
     
     var statistics:Statistics!
     

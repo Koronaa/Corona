@@ -16,19 +16,19 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noRecordLabel: UILabel!
     
-    fileprivate var commonPresenter:CommonViewModelIMPL!
-    fileprivate var homePresenter:HomeViewModelIMPL!
+    fileprivate var commonViewModel:CommonViewModelIMPL!
+    fileprivate var homeViewModel:HomeViewModelIMPL!
     fileprivate var overviewCellMaker:DependencyRegistryIMPL.OverviewCellMaker!
     fileprivate var hospitalCellMaker:DependencyRegistryIMPL.HopitalCellMaker!
     fileprivate var refreshControl = UIRefreshControl()
     fileprivate var bag = DisposeBag()
     
-    func configure(with presenter:HomeViewModelIMPL,
-                   commonPresenter:CommonViewModelIMPL,
+    func configure(with viewModel:HomeViewModelIMPL,
+                   commonViewModel:CommonViewModelIMPL,
                    overviewCellMaker:@escaping DependencyRegistryIMPL.OverviewCellMaker,
                    hospitalCellMaker:@escaping DependencyRegistryIMPL.HopitalCellMaker){
-        self.homePresenter = presenter
-        self.commonPresenter = commonPresenter
+        self.homeViewModel = viewModel
+        self.commonViewModel = commonViewModel
         self.overviewCellMaker = overviewCellMaker
         self.hospitalCellMaker = hospitalCellMaker
     }
@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         setupRefreshControl()
         setupTableView()
         tableView.reloadData()
-        self.setupUI(homePresenter: homePresenter)
+        self.setupUI(homeViewModel: homeViewModel)
     }
     
     func setupTableView(){
@@ -54,9 +54,8 @@ class HomeViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
-    func loadStatistics(from presenter:CommonViewModelIMPL){
-        
-        presenter.loadStatistics { statRelay in
+    func loadStatistics(from viewModel:CommonViewModelIMPL){
+        viewModel.loadStatistics { statRelay in
             self.refreshControl.endRefreshing()
             statRelay.asObservable()
                 .observeOn(MainScheduler.instance)
@@ -65,17 +64,17 @@ class HomeViewController: UIViewController {
                         UIHelper.makeSnackBar(message: errorMessage ?? "Error", type: .ERROR)
                         return
                     }
-                    self.homePresenter.statistics = statistics
-                    self.setupUI(homePresenter: self.homePresenter)
+                    self.homeViewModel.statistics = statistics
+                    self.setupUI(homeViewModel: self.homeViewModel)
                     self.setupTableView()
                     self.tableView.reloadData()
                 }).disposed(by: self.bag)
         }
     }
     
-    func setupUI(homePresenter:HomeViewModelIMPL){
-        dateTimeLabel.text = homePresenter.date
-        if homePresenter.hospitalCount == 0{
+    func setupUI(homeViewModel:HomeViewModelIMPL){
+        dateTimeLabel.text = homeViewModel.date
+        if homeViewModel.hospitalCount == 0{
             UIHelper.show(view: noRecordLabel)
         }else{
             UIHelper.hide(view: noRecordLabel)
@@ -83,7 +82,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func refresh() {
-        loadStatistics(from: self.commonPresenter)
+        loadStatistics(from: self.commonViewModel)
     }
 }
 
@@ -98,7 +97,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return 1
         case 1:
-            return self.homePresenter.statistics!.hospitals.count
+            return self.homeViewModel.statistics!.hospitals.count
         default:
             return 0
         }
@@ -108,11 +107,11 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         let section = indexPath.section
         switch section {
         case 0:
-            let stat = self.homePresenter.statistics
+            let stat = self.homeViewModel.statistics
             let cell = overviewCellMaker(tableView,indexPath,stat!)
             return cell
         case 1:
-            let hospital = self.homePresenter.statistics!.hospitals[indexPath.row]
+            let hospital = self.homeViewModel.statistics!.hospitals[indexPath.row]
             let cell = hospitalCellMaker(tableView,indexPath,hospital)
             return cell
         default:

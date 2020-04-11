@@ -23,16 +23,16 @@ class HospitalDataTableViewCell: UITableViewCell {
     @IBOutlet weak var rightView: UIView!
     
     
-    fileprivate var hospitalDataPresenter:HospitalDataTableViewCellPresenterIMPL!{
+    fileprivate var hospitalDataViewModel:HospitalDataTableViewCellViewModelIMPL!{
         didSet{
             setupCell()
-            hospitalNameLabel.text = self.hospitalDataPresenter.hospitalName
-            totaTestedCountLabel.text = self.hospitalDataPresenter.totalTestedCount
-            localTestedCountLabel.text = self.hospitalDataPresenter.localTestedCount
-            foreignTestedCountLabel.text = self.hospitalDataPresenter.foreignTestedCount
-            foreignAdmittedCountLabel.text = self.hospitalDataPresenter.foreignAdmittedCount
-            totalAdmittedCountLabel.text = self.hospitalDataPresenter.totalAdmittedCount
-            localAdmittedCountLabel.text = self.hospitalDataPresenter.localAdmittedCount
+            hospitalNameLabel.text = self.hospitalDataViewModel.hospitalName
+            totaTestedCountLabel.text = self.hospitalDataViewModel.totalTestedCount
+            localTestedCountLabel.text = self.hospitalDataViewModel.localTestedCount
+            foreignTestedCountLabel.text = self.hospitalDataViewModel.foreignTestedCount
+            foreignAdmittedCountLabel.text = self.hospitalDataViewModel.foreignAdmittedCount
+            totalAdmittedCountLabel.text = self.hospitalDataViewModel.totalAdmittedCount
+            localAdmittedCountLabel.text = self.hospitalDataViewModel.localAdmittedCount
         }
     }
     
@@ -46,9 +46,9 @@ class HospitalDataTableViewCell: UITableViewCell {
         UIHelper.addShadow(to: rightView)
     }
     
-    public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with presenter: HospitalDataTableViewCellPresenterIMPL) -> HospitalDataTableViewCell {
+    public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with viewModel: HospitalDataTableViewCellViewModelIMPL) -> HospitalDataTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.HOSPITALDATA_TV_CELL, for: indexPath) as! HospitalDataTableViewCell
-        cell.hospitalDataPresenter = presenter
+        cell.hospitalDataViewModel = viewModel
         return cell
     }
     

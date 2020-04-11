@@ -25,8 +25,8 @@ extension SwinjectStoryboard{
                 let coordinator:NavigationCoordinatorIMPL = dependencyRegistry.makeRootNavigationCoordinator(rootViewController: viewController)
                 AppDelegate.navigationCoordinator = coordinator
                 
-                let commonPresenter = resolver.resolve(CommonViewModelIMPL.self)
-                viewController.configure(with: commonPresenter!, navigationCoordinator: coordinator)
+                let commonViewModel = resolver.resolve(CommonViewModelIMPL.self)
+                viewController.configure(with: commonViewModel!, navigationCoordinator: coordinator)
             }
         }
         main()
