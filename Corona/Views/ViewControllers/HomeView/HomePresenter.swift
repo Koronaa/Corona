@@ -7,8 +7,14 @@
 //
 
 import Foundation
+import RxRelay
 
-class HomePresenter{
+protocol HomeViewModel {
+    var date:String {get}
+    var hospitalCount:Int {get}
+}
+
+class HomePresenterIMPL:HomeViewModel{
     
     var statistics:Statistics!
     

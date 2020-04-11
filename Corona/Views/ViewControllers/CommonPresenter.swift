@@ -7,17 +7,25 @@
 //
 
 import Foundation
-class CommonPresenter{
+import RxRelay
+
+protocol CommonViewModel {
+    func loadStatistics(onComplete: @escaping (_ stats:BehaviorRelay<(Statistics?,String?,Bool?)>)->Void)
+}
+
+class CommonPresenterIMPL:CommonViewModel{
     
-    fileprivate let modelLayer = ModelLayer()
+    fileprivate let modelLayer:ModelLayerIMPL
     
-    func loadStatistics(onComplete: @escaping (_ stats:Statistics?, _ error:String?,_ isRetry:Bool?)->Void){
-        modelLayer.getStatData { (stat, errorMessage, isRetry)  in
-            if let statistics = stat{
-                onComplete(statistics,nil,nil)
-            }else{
-                onComplete(nil,errorMessage,isRetry)
-            }
+    init(modelLayer:ModelLayerIMPL) {
+        self.modelLayer = modelLayer
+    }
+    
+    func loadStatistics(onComplete: @escaping (BehaviorRelay<(Statistics?, String?, Bool?)>) -> Void) {
+        let statRelay = BehaviorRelay<(Statistics?, String?, Bool?)>(value: (nil,nil,nil))
+        modelLayer.getStatData { (stat, errorMessage, isRetry) in
+            statRelay.accept((stat,errorMessage,isRetry))
+            onComplete(statRelay)
         }
     }
 }

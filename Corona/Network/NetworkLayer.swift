@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RxSwift
 
 enum StatRouter{
     case getStat
@@ -28,16 +29,25 @@ enum StatRouter{
     }
 }
 
-class NetworkLayer{
+protocol NetworkLayer {
+    func getStatData(onResponse:@escaping RxonAPIResponse)
+}
+
+class NetworkLayerIMPL:NetworkLayer{
     
-    func getStatData(onResponse:onAPIResponse?){
-        ServiceManager.APIRequest(url: StatRouter.getStat.url, method: StatRouter.getStat.method) { (response, responseCode) in
-            if response != nil{
-                let jsonData:JSON = JSON((response as! DataResponse<Any>).result.value!)
-                onResponse?(jsonData,responseCode)
-            }else{
-                onResponse?(nil,responseCode)
-            }
+    fileprivate var bag = DisposeBag()
+    
+    func getStatData(onResponse:@escaping RxonAPIResponse){
+        
+        ServiceManager.APIRequest(url: StatRouter.getStat.url, method: StatRouter.getStat.method) { serviceObservable in
+            serviceObservable.subscribe(onNext: { response, responseCode in
+                if response != nil{
+                    let jsonData:JSON = JSON((response as! DataResponse<Any>).result.value!)
+                    onResponse(Observable.just((jsonData,responseCode)))
+                }else{
+                    onResponse(serviceObservable)
+                }
+            }).disposed(by: self.bag)
         }
     }
 }

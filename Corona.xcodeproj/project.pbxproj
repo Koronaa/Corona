@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D17E187243050E800319088 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E186243050E800319088 /* HomePresenter.swift */; };
-		3D17E18B2430539400319088 /* HospitalDataTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E18A2430539400319088 /* HospitalDataTableViewCellPresenter.swift */; };
-		3D17E18D2430821200319088 /* OverviewTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E18C2430821200319088 /* OverviewTableViewCellPresenter.swift */; };
+		3D1719642437171200EF09B3 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1719632437171200EF09B3 /* NavigationCoordinator.swift */; };
+		3D17E187243050E800319088 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E186243050E800319088 /* HomeViewModel.swift */; };
+		3D17E18B2430539400319088 /* HospitalDataTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E18A2430539400319088 /* HospitalDataTableViewCellViewModel.swift */; };
+		3D17E18D2430821200319088 /* OverviewTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E18C2430821200319088 /* OverviewTableViewCellViewModel.swift */; };
 		3D17E18F243093DA00319088 /* TranslationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17E18E243093DA00319088 /* TranslationLayer.swift */; };
-		3D7B6CE5243046C800824334 /* CommonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7B6CE4243046C800824334 /* CommonPresenter.swift */; };
+		3D3568922434A0D500CE9CAA /* DependencyRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3568912434A0D500CE9CAA /* DependencyRegistry.swift */; };
+		3D3568942434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3568932434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift */; };
+		3D7B6CE5243046C800824334 /* CommonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7B6CE4243046C800824334 /* CommonViewModel.swift */; };
 		3D830E4D2421F2490017F7DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E4C2421F2490017F7DC /* AppDelegate.swift */; };
 		3D830E4F2421F2490017F7DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E4E2421F2490017F7DC /* SceneDelegate.swift */; };
 		3D830E512421F2490017F7DC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E502421F2490017F7DC /* HomeViewController.swift */; };
@@ -38,11 +41,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3D17E186243050E800319088 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
-		3D17E18A2430539400319088 /* HospitalDataTableViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDataTableViewCellPresenter.swift; sourceTree = "<group>"; };
-		3D17E18C2430821200319088 /* OverviewTableViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTableViewCellPresenter.swift; sourceTree = "<group>"; };
+		3D1719632437171200EF09B3 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
+		3D17E186243050E800319088 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		3D17E18A2430539400319088 /* HospitalDataTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDataTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		3D17E18C2430821200319088 /* OverviewTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		3D17E18E243093DA00319088 /* TranslationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationLayer.swift; sourceTree = "<group>"; };
-		3D7B6CE4243046C800824334 /* CommonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPresenter.swift; sourceTree = "<group>"; };
+		3D3568912434A0D500CE9CAA /* DependencyRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyRegistry.swift; sourceTree = "<group>"; };
+		3D3568932434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwinjectStoryboard+Extensions.swift"; sourceTree = "<group>"; };
+		3D7B6CE4243046C800824334 /* CommonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModel.swift; sourceTree = "<group>"; };
 		3D830E492421F2490017F7DC /* Corona.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Corona.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D830E4C2421F2490017F7DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D830E4E2421F2490017F7DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,12 +91,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D171962243716EC00EF09B3 /* NavigationCoordinators */ = {
+			isa = PBXGroup;
+			children = (
+				3D1719632437171200EF09B3 /* NavigationCoordinator.swift */,
+			);
+			path = NavigationCoordinators;
+			sourceTree = "<group>";
+		};
 		3D17E1882430536D00319088 /* Overview */ = {
 			isa = PBXGroup;
 			children = (
 				3D830E602421F6E10017F7DC /* OverviewCell.xib */,
 				3D830E7C2422326A0017F7DC /* OverviewTableViewCell.swift */,
-				3D17E18C2430821200319088 /* OverviewTableViewCellPresenter.swift */,
+				3D17E18C2430821200319088 /* OverviewTableViewCellViewModel.swift */,
 			);
 			path = Overview;
 			sourceTree = "<group>";
@@ -100,9 +114,18 @@
 			children = (
 				3D830E622421FF510017F7DC /* HospitalDataTVCell.xib */,
 				3D830E7E2422327A0017F7DC /* HospitalDataTableViewCell.swift */,
-				3D17E18A2430539400319088 /* HospitalDataTableViewCellPresenter.swift */,
+				3D17E18A2430539400319088 /* HospitalDataTableViewCellViewModel.swift */,
 			);
 			path = Hospital;
+			sourceTree = "<group>";
+		};
+		3D356890243487E000CE9CAA /* Injection */ = {
+			isa = PBXGroup;
+			children = (
+				3D3568912434A0D500CE9CAA /* DependencyRegistry.swift */,
+				3D3568932434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift */,
+			);
+			path = Injection;
 			sourceTree = "<group>";
 		};
 		3D7B6CE3243046AE00824334 /* InitialView */ = {
@@ -117,7 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				3D830E502421F2490017F7DC /* HomeViewController.swift */,
-				3D17E186243050E800319088 /* HomePresenter.swift */,
+				3D17E186243050E800319088 /* HomeViewModel.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -143,6 +166,8 @@
 		3D830E4B2421F2490017F7DC /* Corona */ = {
 			isa = PBXGroup;
 			children = (
+				3D171962243716EC00EF09B3 /* NavigationCoordinators */,
+				3D356890243487E000CE9CAA /* Injection */,
 				3D8F295E242757CB0061B372 /* Corona.entitlements */,
 				3D830E71242210150017F7DC /* Network */,
 				3D830E6924220E050017F7DC /* Models */,
@@ -179,7 +204,7 @@
 		3D830E6624220C280017F7DC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D7B6CE4243046C800824334 /* CommonPresenter.swift */,
+				3D7B6CE4243046C800824334 /* CommonViewModel.swift */,
 				3D7B6CE62430475A00824334 /* HomeView */,
 				3D7B6CE3243046AE00824334 /* InitialView */,
 			);
@@ -359,18 +384,21 @@
 				3D830E792422134B0017F7DC /* NetworkLayer.swift in Sources */,
 				3D17E18F243093DA00319088 /* TranslationLayer.swift in Sources */,
 				3D830E752422115C0017F7DC /* ReachabilityManager.swift in Sources */,
-				3D17E18B2430539400319088 /* HospitalDataTableViewCellPresenter.swift in Sources */,
+				3D17E18B2430539400319088 /* HospitalDataTableViewCellViewModel.swift in Sources */,
 				3D830E512421F2490017F7DC /* HomeViewController.swift in Sources */,
 				3D830E7B2422142C0017F7DC /* ModelLayer.swift in Sources */,
-				3D17E18D2430821200319088 /* OverviewTableViewCellPresenter.swift in Sources */,
+				3D1719642437171200EF09B3 /* NavigationCoordinator.swift in Sources */,
+				3D17E18D2430821200319088 /* OverviewTableViewCellViewModel.swift in Sources */,
+				3D3568942434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift in Sources */,
+				3D3568922434A0D500CE9CAA /* DependencyRegistry.swift in Sources */,
 				3D830E6B24220E1B0017F7DC /* Hospital.swift in Sources */,
 				3D830E4D2421F2490017F7DC /* AppDelegate.swift in Sources */,
-				3D7B6CE5243046C800824334 /* CommonPresenter.swift in Sources */,
+				3D7B6CE5243046C800824334 /* CommonViewModel.swift in Sources */,
 				3D830E7024220F8A0017F7DC /* URLConstants.swift in Sources */,
 				3D830E6D24220EA40017F7DC /* Statistics.swift in Sources */,
 				3D830E73242210220017F7DC /* ServiceManager.swift in Sources */,
 				3D830E4F2421F2490017F7DC /* SceneDelegate.swift in Sources */,
-				3D17E187243050E800319088 /* HomePresenter.swift in Sources */,
+				3D17E187243050E800319088 /* HomeViewModel.swift in Sources */,
 				3D830E7F2422327A0017F7DC /* HospitalDataTableViewCell.swift in Sources */,
 				3DAE1F7824232D2400F6E019 /* Int.swift in Sources */,
 			);

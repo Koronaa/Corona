@@ -9,20 +9,26 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RxSwift
+import RxAlamofire
 
-typealias onAPIResponse = (_ response:Any?, _ statusCode:Int)->()
+
+typealias RxonAPIResponse = (_ observable:Observable<(Any?,Int)>)->()
 
 class ServiceManager{
     
-     static func APIRequest(url:URL,method:HTTPMethod,params:Parameters? = nil,headers:HTTPHeaders? = nil,encoding:ParameterEncoding? = JSONEncoding.default,onResponse:onAPIResponse?){
+    static func APIRequest(url:URL,method:HTTPMethod,params:Parameters? = nil,headers:HTTPHeaders? = nil,encoding:ParameterEncoding? = JSONEncoding.default,onResponse:@escaping RxonAPIResponse){
         if ReachabilityManager.isConnectedToNetwork(){
             Alamofire.request(url, method: method, parameters: params, encoding: encoding!, headers: headers).responseJSON{ response in
                 if let statusCode = response.response?.statusCode{
-                    onResponse?(response,statusCode)
+                    onResponse(Observable.just((response,statusCode)))
                 }
             }
         }else{
-            onResponse?(nil,515)
+            onResponse(Observable.just((nil,515)))
         }
+        
     }
+    
+    
 }

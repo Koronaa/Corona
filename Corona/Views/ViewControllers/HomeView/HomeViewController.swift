@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class HomeViewController: UIViewController {
     
@@ -14,18 +16,29 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noRecordLabel: UILabel!
     
-    fileprivate var commonPresenter:CommonPresenter!
-    var homePresenter:HomePresenter!
-    var refreshControl = UIRefreshControl()
+    fileprivate var commonViewModel:CommonViewModelIMPL!
+    fileprivate var homeViewModel:HomeViewModelIMPL!
+    fileprivate var overviewCellMaker:DependencyRegistryIMPL.OverviewCellMaker!
+    fileprivate var hospitalCellMaker:DependencyRegistryIMPL.HopitalCellMaker!
+    fileprivate var refreshControl = UIRefreshControl()
+    fileprivate var bag = DisposeBag()
     
+    func configure(with viewModel:HomeViewModelIMPL,
+                   commonViewModel:CommonViewModelIMPL,
+                   overviewCellMaker:@escaping DependencyRegistryIMPL.OverviewCellMaker,
+                   hospitalCellMaker:@escaping DependencyRegistryIMPL.HopitalCellMaker){
+        self.homeViewModel = viewModel
+        self.commonViewModel = commonViewModel
+        self.overviewCellMaker = overviewCellMaker
+        self.hospitalCellMaker = hospitalCellMaker
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRefreshControl()
         setupTableView()
         tableView.reloadData()
-        commonPresenter = CommonPresenter()
-        self.setupUI(homePresenter: homePresenter)
+        self.setupUI(homeViewModel: homeViewModel)
     }
     
     func setupTableView(){
@@ -41,23 +54,27 @@ class HomeViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
-    func loadStatistics(from presenter:CommonPresenter){
-        presenter.loadStatistics { (stats, errorMessage, isRetryAvailable) in
+    func loadStatistics(from viewModel:CommonViewModelIMPL){
+        viewModel.loadStatistics { statRelay in
             self.refreshControl.endRefreshing()
-            if let statistics = stats{
-                self.homePresenter.statistics = statistics
-                self.setupUI(homePresenter: self.homePresenter)
-                self.setupTableView()
-                self.tableView.reloadData()
-            }else{
-                UIHelper.makeSnackBar(message: errorMessage ?? "Error", type: .ERROR)
-            }
+            statRelay.asObservable()
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { (stats, errorMessage, _) in
+                    guard let statistics = stats else{
+                        UIHelper.makeSnackBar(message: errorMessage ?? "Error", type: .ERROR)
+                        return
+                    }
+                    self.homeViewModel.statistics = statistics
+                    self.setupUI(homeViewModel: self.homeViewModel)
+                    self.setupTableView()
+                    self.tableView.reloadData()
+                }).disposed(by: self.bag)
         }
     }
     
-    func setupUI(homePresenter:HomePresenter){
-        dateTimeLabel.text = homePresenter.date
-        if homePresenter.hospitalCount == 0{
+    func setupUI(homeViewModel:HomeViewModelIMPL){
+        dateTimeLabel.text = homeViewModel.date
+        if homeViewModel.hospitalCount == 0{
             UIHelper.show(view: noRecordLabel)
         }else{
             UIHelper.hide(view: noRecordLabel)
@@ -65,7 +82,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func refresh() {
-        loadStatistics(from: self.commonPresenter)
+        loadStatistics(from: self.commonViewModel)
     }
 }
 
@@ -80,7 +97,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return 1
         case 1:
-            return self.homePresenter.statistics!.hospitals.count
+            return self.homeViewModel.statistics!.hospitals.count
         default:
             return 0
         }
@@ -90,13 +107,12 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         let section = indexPath.section
         switch section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.OVERVIEW_TV_CELL, for: indexPath) as! OverviewTableViewCell
-            cell.overViewTableViewCellPresenter = OverviewTableViewCellPresenter(statistics: self.homePresenter.statistics)
+            let stat = self.homeViewModel.statistics
+            let cell = overviewCellMaker(tableView,indexPath,stat!)
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: UIConstants.Cell.HOSPITALDATA_TV_CELL, for: indexPath) as! HospitalDataTableViewCell
-            let hospitalPresenter = HospitalDataTableViewCellPresenter(hospital: self.homePresenter.statistics!.hospitals[indexPath.row])
-            cell.hospitalDataPresenter = hospitalPresenter
+            let hospital = self.homeViewModel.statistics!.hospitals[indexPath.row]
+            let cell = hospitalCellMaker(tableView,indexPath,hospital)
             return cell
         default:
             return UITableViewCell()
