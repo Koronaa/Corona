@@ -16,15 +16,15 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noRecordLabel: UILabel!
     
-    fileprivate var commonPresenter:CommonPresenterIMPL!
-    fileprivate var homePresenter:HomePresenterIMPL!
+    fileprivate var commonPresenter:CommonViewModelIMPL!
+    fileprivate var homePresenter:HomeViewModelIMPL!
     fileprivate var overviewCellMaker:DependencyRegistryIMPL.OverviewCellMaker!
     fileprivate var hospitalCellMaker:DependencyRegistryIMPL.HopitalCellMaker!
     fileprivate var refreshControl = UIRefreshControl()
     fileprivate var bag = DisposeBag()
     
-    func configure(with presenter:HomePresenterIMPL,
-                   commonPresenter:CommonPresenterIMPL,
+    func configure(with presenter:HomeViewModelIMPL,
+                   commonPresenter:CommonViewModelIMPL,
                    overviewCellMaker:@escaping DependencyRegistryIMPL.OverviewCellMaker,
                    hospitalCellMaker:@escaping DependencyRegistryIMPL.HopitalCellMaker){
         self.homePresenter = presenter
@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
-    func loadStatistics(from presenter:CommonPresenterIMPL){
+    func loadStatistics(from presenter:CommonViewModelIMPL){
         
         presenter.loadStatistics { statRelay in
             self.refreshControl.endRefreshing()
@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func setupUI(homePresenter:HomePresenterIMPL){
+    func setupUI(homePresenter:HomeViewModelIMPL){
         dateTimeLabel.text = homePresenter.date
         if homePresenter.hospitalCount == 0{
             UIHelper.show(view: noRecordLabel)

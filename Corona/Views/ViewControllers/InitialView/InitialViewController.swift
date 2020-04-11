@@ -14,11 +14,11 @@ class InitialViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    fileprivate var presenter:CommonPresenterIMPL!
+    fileprivate var presenter:CommonViewModelIMPL!
     fileprivate weak var navigationCoordinator:NavigationCoordinatorIMPL?
     fileprivate var bag = DisposeBag()
     
-    func configure(with commonPresenter:CommonPresenterIMPL,navigationCoordinator:NavigationCoordinatorIMPL){
+    func configure(with commonPresenter:CommonViewModelIMPL,navigationCoordinator:NavigationCoordinatorIMPL){
         self.presenter = commonPresenter
         self.navigationCoordinator = navigationCoordinator
     }
@@ -32,7 +32,7 @@ class InitialViewController: UIViewController {
         loadData(from: presenter)
     }
     
-    private func loadData(from presenter:CommonPresenterIMPL){
+    private func loadData(from presenter:CommonViewModelIMPL){
         
         presenter.loadStatistics { statRelay in
             statRelay.asObservable()

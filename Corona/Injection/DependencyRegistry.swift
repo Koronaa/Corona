@@ -55,16 +55,16 @@ class DependencyRegistryIMPL:DependencyRegistry{
     }
     
     func registerPresenters(){
-        container.register(HomePresenterIMPL.self) {(resolover , stats:Statistics) in HomePresenterIMPL(statistics: stats)}
-        container.register(CommonPresenterIMPL.self){resolover in CommonPresenterIMPL(modelLayer: resolover.resolve(ModelLayerIMPL.self)!)}
+        container.register(HomeViewModelIMPL.self) {(resolover , stats:Statistics) in HomeViewModelIMPL(statistics: stats)}
+        container.register(CommonViewModelIMPL.self){resolover in CommonViewModelIMPL(modelLayer: resolover.resolve(ModelLayerIMPL.self)!)}
         container.register(OverviewTableViewCellPresenterIMPL.self){(resolover , stats:Statistics) in OverviewTableViewCellPresenterIMPL(statistics: stats)}
         container.register(HospitalDataTableViewCellPresenterIMPL.self) {(resolver, hospital:Hospital) in HospitalDataTableViewCellPresenterIMPL(hospital: hospital)}
     }
     
     func registerViewControllers(){
         container.register(HomeViewController.self) {(resolver, stat:Statistics) in
-            let homePresenter = resolver.resolve(HomePresenterIMPL.self, argument: stat)
-            let commonPresenter = resolver.resolve(CommonPresenterIMPL.self)
+            let homePresenter = resolver.resolve(HomeViewModelIMPL.self, argument: stat)
+            let commonPresenter = resolver.resolve(CommonViewModelIMPL.self)
             let homeVC = UIHelper.makeHomeViewController()
             homeVC.configure(with: homePresenter!, commonPresenter: commonPresenter!, overviewCellMaker: self.makeOverviewCell, hospitalCellMaker: self.makeHospitalDataCell)
             return homeVC

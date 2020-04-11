@@ -14,7 +14,7 @@ protocol HomeViewModel {
     var hospitalCount:Int {get}
 }
 
-class HomePresenterIMPL:HomeViewModel{
+class HomeViewModelIMPL:HomeViewModel{
     
     var statistics:Statistics!
     

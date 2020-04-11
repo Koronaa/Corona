@@ -13,7 +13,7 @@ protocol CommonViewModel {
     func loadStatistics(onComplete: @escaping (_ stats:BehaviorRelay<(Statistics?,String?,Bool?)>)->Void)
 }
 
-class CommonPresenterIMPL:CommonViewModel{
+class CommonViewModelIMPL:CommonViewModel{
     
     fileprivate let modelLayer:ModelLayerIMPL
     
