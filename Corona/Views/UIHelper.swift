@@ -8,7 +8,8 @@
 
 import Foundation
 import UIKit
-import TTGSnackbar
+import NotificationBannerSwift
+
 
 enum SnackType:String{
     case ERROR = "ERROR"
@@ -42,21 +43,9 @@ class UIHelper{
         }
     }
     
-    static func makeSnackBar(message:String,type:SnackType = SnackType.ERROR){
-          DispatchQueue.main.async {
-              let snack = TTGSnackbar(message: message, duration: .long)
-              snack.messageTextFont = UIFont(name: "Avenir-Medium", size: 17.0)!
-              if type == SnackType.ERROR {
-                  snack.backgroundColor = UIColor(displayP3Red: 231/255, green: 76/255, blue: 60/255, alpha: 1)
-              }else if type == SnackType.WARNING{
-                  snack.backgroundColor = UIColor(displayP3Red: 248/255, green: 166/255, blue: 0/255, alpha: 1)
-              }else{
-                  snack.backgroundColor = UIColor(displayP3Red: 139/255, green: 195/255, blue: 74/255, alpha: 1)
-              }
-              snack.shouldDismissOnSwipe = true
-              snack.show()
-          }
-      }
+    static func makeBanner(title:String,message:String,style:BannerStyle = .danger) -> GrowingNotificationBanner{
+        return GrowingNotificationBanner(title: title, subtitle: message, style: style)
+    }
     
     static func hide(view:UIView){
         view.isHidden = true

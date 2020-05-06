@@ -9,6 +9,8 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import SkeletonView
+import NotificationBannerSwift
 
 class HomeViewController: UIViewController {
     
@@ -16,7 +18,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noRecordLabel: UILabel!
     
-    fileprivate var commonViewModel:CommonViewModelIMPL!
     fileprivate var homeViewModel:HomeViewModelIMPL!
     fileprivate var overviewCellMaker:DependencyRegistryIMPL.OverviewCellMaker!
     fileprivate var hospitalCellMaker:DependencyRegistryIMPL.HopitalCellMaker!
@@ -24,55 +25,76 @@ class HomeViewController: UIViewController {
     fileprivate var bag = DisposeBag()
     
     func configure(with viewModel:HomeViewModelIMPL,
-                   commonViewModel:CommonViewModelIMPL,
                    overviewCellMaker:@escaping DependencyRegistryIMPL.OverviewCellMaker,
                    hospitalCellMaker:@escaping DependencyRegistryIMPL.HopitalCellMaker){
         self.homeViewModel = viewModel
-        self.commonViewModel = commonViewModel
         self.overviewCellMaker = overviewCellMaker
         self.hospitalCellMaker = hospitalCellMaker
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRefreshControl()
         setupTableView()
-        tableView.reloadData()
-        self.setupUI(homeViewModel: homeViewModel)
+        setupSkeleton()
     }
     
-    func setupTableView(){
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadStatistics(from: homeViewModel, fromRefresh: false)
+        setupRefreshControl()
+    }
+    
+    
+    
+    private func setupTableView(){
         tableView.register(UINib(nibName: "OverviewCell", bundle: .main), forCellReuseIdentifier: UIConstants.Cell.OVERVIEW_TV_CELL)
         tableView.register(UINib(nibName: "HospitalDataTVCell", bundle: .main), forCellReuseIdentifier: UIConstants.Cell.HOSPITALDATA_TV_CELL)
         tableView.dataSource = self
         tableView.delegate = self
     }
     
-    func setupRefreshControl(){
+    private func setupRefreshControl(){
         refreshControl.tintColor = .white
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
     
-    func loadStatistics(from viewModel:CommonViewModelIMPL){
+    private func setupSkeleton(){
+        let gradient = SkeletonGradient(baseColor: UIColor(displayP3Red: 55/255, green: 79/255, blue: 112/255, alpha: 1))
+        tableView.showAnimatedGradientSkeleton(usingGradient: gradient, animation: nil, transition: .none)
+        tableView.startSkeletonAnimation()
+    }
+    
+    private func loadStatistics(from viewModel:HomeViewModelIMPL,fromRefresh:Bool){
         viewModel.loadStatistics { statRelay in
             self.refreshControl.endRefreshing()
             statRelay.asObservable()
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { (stats, errorMessage, _) in
                     guard let statistics = stats else{
-                        UIHelper.makeSnackBar(message: errorMessage ?? "Error", type: .ERROR)
+                        if let error = errorMessage{
+                            var banner:GrowingNotificationBanner!
+                            if fromRefresh{
+                                banner = UIHelper.makeBanner(title: error.title, message: error.message)
+                            }else{
+                                banner = self.showRetryBanner(title: error.title, message: error.message)
+                            }
+                            banner.show()
+                        }
                         return
                     }
                     self.homeViewModel.statistics = statistics
-                    self.setupUI(homeViewModel: self.homeViewModel)
-                    self.setupTableView()
+                    if !fromRefresh{
+                        self.tableView.stopSkeletonAnimation()
+                        self.tableView.hideSkeleton()
+                    }
                     self.tableView.reloadData()
+                    self.setupUI(homeViewModel: self.homeViewModel)
                 }).disposed(by: self.bag)
         }
     }
     
-    func setupUI(homeViewModel:HomeViewModelIMPL){
+    private func setupUI(homeViewModel:HomeViewModelIMPL){
         dateTimeLabel.text = homeViewModel.date
         if homeViewModel.hospitalCount == 0{
             UIHelper.show(view: noRecordLabel)
@@ -81,12 +103,22 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @objc func refresh() {
-        loadStatistics(from: self.commonViewModel)
+    @objc private func refresh() {
+        loadStatistics(from: self.homeViewModel,fromRefresh: true)
+    }
+    
+    private func showRetryBanner(title:String,message:String) -> GrowingNotificationBanner{
+        let banner = UIHelper.makeBanner(title: title, message: "\(message) Tap here to retry.")
+        banner.autoDismiss = false
+        banner.onTap = {
+            banner.dismiss()
+            self.loadStatistics(from: self.homeViewModel, fromRefresh: false)
+        }
+        return banner
     }
 }
 
-extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
+extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -97,7 +129,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return 1
         case 1:
-            return self.homeViewModel.statistics!.hospitals.count
+            return self.homeViewModel.statistics?.hospitals.count ?? 0
         default:
             return 0
         }
@@ -144,7 +176,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let myLabel = UILabel()
-        myLabel.frame = CGRect(x: 5, y: 1, width: 320, height: 20)
+        myLabel.frame = CGRect(x: 15, y: 1, width: 320, height: 20)
         myLabel.font = UIFont(name: "Avenir-Heavy", size: 18)
         myLabel.textColor = .white
         myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
@@ -154,6 +186,33 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource{
         headerView.addSubview(myLabel)
         
         return headerView
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        let section = indexPath.section
+        switch section {
+        case 0:
+            return UIConstants.Cell.OVERVIEW_TV_CELL
+        case 1:
+            return UIConstants.Cell.HOSPITALDATA_TV_CELL
+        default:
+            return ""
+        }
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 3
+        default:
+            return 1
+        }
+    }
+    
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        return 2
     }
 }
 

@@ -13,7 +13,6 @@ import SwinjectStoryboard
 protocol DependencyRegistry {
     
     var container:Container {get}
-    var navigationCoordinator:NavigationCoordinatorIMPL! {get}
     
     typealias HomeViewControllerMaker = (Statistics) -> HomeViewController
     func makeHomeViewController(with statistics:Statistics) -> HomeViewController
@@ -27,7 +26,6 @@ protocol DependencyRegistry {
 
 class DependencyRegistryIMPL:DependencyRegistry{
     
-    var navigationCoordinator: NavigationCoordinatorIMPL!
     var container:Container
     
     init(container:Container) {
@@ -37,7 +35,7 @@ class DependencyRegistryIMPL:DependencyRegistry{
         
         registerDependencies()
         registerViewModels()
-        registerViewControllers()
+        
     }
     
     
@@ -49,26 +47,12 @@ class DependencyRegistryIMPL:DependencyRegistry{
             ModelLayerIMPL(networkLayer: resolver.resolve(NetworkLayerIMPL.self)!, translationLayer: resolver.resolve(TranslationLayerIMPL.self)!)
         }.inObjectScope(.container)
         
-        container.register(NavigationCoordinatorIMPL.self){(resolver,rootViewController:UIViewController) in
-            return NavigationCoordinatorIMPL(with: rootViewController, registry: self)
-        }.inObjectScope(.container)
     }
     
     func registerViewModels(){
-        container.register(HomeViewModelIMPL.self) {(resolover , stats:Statistics) in HomeViewModelIMPL(statistics: stats)}
-        container.register(CommonViewModelIMPL.self){resolover in CommonViewModelIMPL(modelLayer: resolover.resolve(ModelLayerIMPL.self)!)}
+        container.register(HomeViewModelIMPL.self) {resolover in HomeViewModelIMPL(modelLayer: resolover.resolve(ModelLayerIMPL.self)!)}
         container.register(OverviewTableViewCellViewModelIMPL.self){(resolover , stats:Statistics) in OverviewTableViewCellViewModelIMPL(statistics: stats)}
         container.register(HospitalDataTableViewCellViewModelIMPL.self) {(resolver, hospital:Hospital) in HospitalDataTableViewCellViewModelIMPL(hospital: hospital)}
-    }
-    
-    func registerViewControllers(){
-        container.register(HomeViewController.self) {(resolver, stat:Statistics) in
-            let homeViewModel = resolver.resolve(HomeViewModelIMPL.self, argument: stat)
-            let commonViewModel = resolver.resolve(CommonViewModelIMPL.self)
-            let homeVC = UIHelper.makeHomeViewController()
-            homeVC.configure(with: homeViewModel!, commonViewModel: commonViewModel!, overviewCellMaker: self.makeOverviewCell, hospitalCellMaker: self.makeHospitalDataCell)
-            return homeVC
-        }
     }
     
     func makeHomeViewController(with statistics:Statistics) -> HomeViewController{
@@ -85,11 +69,6 @@ class DependencyRegistryIMPL:DependencyRegistry{
         let viewModel = container.resolve(HospitalDataTableViewCellViewModelIMPL.self, argument: hospital)!
         let cell = HospitalDataTableViewCell.dequeue(from: tableView, for: indexPath, with: viewModel)
         return cell
-    }
-    
-    func makeRootNavigationCoordinator(rootViewController:UIViewController) -> NavigationCoordinatorIMPL{
-        navigationCoordinator = container.resolve(NavigationCoordinatorIMPL.self,argument: rootViewController)
-        return navigationCoordinator
     }
     
 }

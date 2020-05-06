@@ -11,7 +11,7 @@ import SwiftyJSON
 import RxSwift
 
 protocol ModelLayer {
-    func getStatData(onCompleted:@escaping (_ stat:Statistics?,_ errorMessage:String?,_ isRetry:Bool)->Void)
+    func getStatData(onCompleted:@escaping (_ stat:Statistics?,_ error:Error?,_ isRetry:Bool)->Void)
 }
 
 class ModelLayerIMPL:ModelLayer{
@@ -24,8 +24,7 @@ class ModelLayerIMPL:ModelLayer{
         self.translationLayer = translationLayer
     }
     
-    func getStatData(onCompleted:@escaping (_ stat:Statistics?,_ errorMessage:String?,_ isRetry:Bool)->Void){
-        
+    func getStatData(onCompleted:@escaping (_ stat:Statistics?,_ error:Error?,_ isRetry:Bool)->Void){
         networkLayer.getStatData { [weak self] networkObservable in
             if let _ = self{
                 networkObservable
@@ -37,9 +36,11 @@ class ModelLayerIMPL:ModelLayer{
                                 }
                             }
                         }else if responseCode == 515{
-                            onCompleted(nil,"You are a  ppear to be offline. Please try again.",true)
+                            let error = Error(title: "No Connectivity!", message: "You are appear to be offline.")
+                            onCompleted(nil,error,true)
                         }else{
-                            onCompleted(nil,"Error while retrieving data. Please try again",true)
+                             let error = Error(title: "Service Error!", message: "Error while retrieving data.")
+                            onCompleted(nil,error,true)
                         }
                     }).disposed(by: DisposeBag())
             }

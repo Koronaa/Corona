@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
     
     var window: UIWindow?
     static var dependencyRegistry:DependencyRegistryIMPL!
-    static var navigationCoordinator:NavigationCoordinator!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()

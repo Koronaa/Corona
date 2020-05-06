@@ -10,13 +10,30 @@ import Foundation
 import RxRelay
 
 protocol HomeViewModel {
+    
+    func loadStatistics(onComplete: @escaping (_ stats:BehaviorRelay<(Statistics?,Error?,Bool?)>)->Void)
     var date:String {get}
     var hospitalCount:Int {get}
+    var statistics:Statistics! {get}
+    
 }
 
 class HomeViewModelIMPL:HomeViewModel{
     
+    fileprivate let modelLayer:ModelLayerIMPL
     var statistics:Statistics!
+    
+    init(modelLayer:ModelLayerIMPL) {
+        self.modelLayer = modelLayer
+    }
+    
+    func loadStatistics(onComplete: @escaping (BehaviorRelay<(Statistics?, Error?, Bool?)>) -> Void) {
+        let statRelay = BehaviorRelay<(Statistics?, Error?, Bool?)>(value: (nil,nil,nil))
+        modelLayer.getStatData { (stat, errorMessage, isRetry) in
+            statRelay.accept((stat,errorMessage,isRetry))
+            onComplete(statRelay)
+        }
+    }
     
     var date:String {
         let date = statistics.updatedDate
@@ -27,10 +44,6 @@ class HomeViewModelIMPL:HomeViewModel{
     
     var hospitalCount:Int {
         return statistics.hospitals.count
-    }
-    
-    init(statistics:Statistics) {
-        self.statistics = statistics
     }
     
 }
