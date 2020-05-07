@@ -12,8 +12,6 @@ target 'Corona' do
   pod 'RxCocoa'
   pod 'RxDataSources'
   pod 'NotificationBannerSwift'
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Messaging'
   pod 'Swinject'
   pod 'SwinjectStoryboard' , :git=> 'https://github.com/Swinject/SwinjectStoryboard.git', :tag => '2.2.0'
   pod "SkeletonView"
