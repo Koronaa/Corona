@@ -18,3 +18,4 @@ target 'Corona' do
   pod 'SwinjectStoryboard' , :git=> 'https://github.com/Swinject/SwinjectStoryboard.git', :tag => '2.2.0'
   pod "SkeletonView"
 end
+
