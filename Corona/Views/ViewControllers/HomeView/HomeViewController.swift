@@ -85,8 +85,8 @@ class HomeViewController: UIViewController {
                     }
                     self.homeViewModel.statistics = statistics
                     if !fromRefresh{
-                        self.tableView.stopSkeletonAnimation()
                         self.tableView.hideSkeleton()
+                        self.tableView.stopSkeletonAnimation()
                     }
                     self.tableView.reloadData()
                     self.setupUI(homeViewModel: self.homeViewModel)
@@ -205,7 +205,15 @@ extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
         case 0:
             return 1
         case 1:
-            return 3
+            switch DeviceManager.getDeviceType() {
+            case .iPhone_5_5s_5C_SE:
+                 return 1
+            case .iPhone_XsMax_11ProMax,.iPhone_Xr_11:
+                return 3
+            default:
+                return 2
+            }
+            
         default:
             return 1
         }

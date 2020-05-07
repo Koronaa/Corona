@@ -14,6 +14,8 @@
 		3D3568922434A0D500CE9CAA /* DependencyRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3568912434A0D500CE9CAA /* DependencyRegistry.swift */; };
 		3D3568942434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3568932434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift */; };
 		3D51893F2462E10400F9003E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D51893E2462E10400F9003E /* Error.swift */; };
+		3D73C0EF2463BBCF00585AA6 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D73C0EE2463BBCF00585AA6 /* UIDevice+Extensions.swift */; };
+		3D73C0F22463C24000585AA6 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D73C0F12463BC4C00585AA6 /* DeviceManager.swift */; };
 		3D830E4D2421F2490017F7DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E4C2421F2490017F7DC /* AppDelegate.swift */; };
 		3D830E4F2421F2490017F7DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E4E2421F2490017F7DC /* SceneDelegate.swift */; };
 		3D830E512421F2490017F7DC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D830E502421F2490017F7DC /* HomeViewController.swift */; };
@@ -46,6 +48,8 @@
 		3D3568912434A0D500CE9CAA /* DependencyRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyRegistry.swift; sourceTree = "<group>"; };
 		3D3568932434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwinjectStoryboard+Extensions.swift"; sourceTree = "<group>"; };
 		3D51893E2462E10400F9003E /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		3D73C0EE2463BBCF00585AA6 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
+		3D73C0F12463BC4C00585AA6 /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		3D830E492421F2490017F7DC /* Corona.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Corona.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D830E4C2421F2490017F7DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D830E4E2421F2490017F7DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +120,14 @@
 			path = Injection;
 			sourceTree = "<group>";
 		};
+		3D73C0F02463BC4100585AA6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3D73C0F12463BC4C00585AA6 /* DeviceManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		3D7B6CE62430475A00824334 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +158,7 @@
 		3D830E4B2421F2490017F7DC /* Corona */ = {
 			isa = PBXGroup;
 			children = (
+				3D73C0F02463BC4100585AA6 /* Managers */,
 				3D356890243487E000CE9CAA /* Injection */,
 				3D8F295E242757CB0061B372 /* Corona.entitlements */,
 				3D830E71242210150017F7DC /* Network */,
@@ -233,6 +246,7 @@
 		3DAE1F7624232D0F00F6E019 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3D73C0EE2463BBCF00585AA6 /* UIDevice+Extensions.swift */,
 				3DAE1F7724232D2400F6E019 /* Int.swift */,
 			);
 			path = Extensions;
@@ -355,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D73C0F22463C24000585AA6 /* DeviceManager.swift in Sources */,
 				3D830E8224223E430017F7DC /* UIHelper.swift in Sources */,
 				3DBBFF4E24229E5B0012D6A6 /* UIConstants.swift in Sources */,
 				3D830E7D2422326A0017F7DC /* OverviewTableViewCell.swift in Sources */,
@@ -363,6 +378,7 @@
 				3D830E752422115C0017F7DC /* ReachabilityManager.swift in Sources */,
 				3D17E18B2430539400319088 /* HospitalDataTableViewCellViewModel.swift in Sources */,
 				3D830E512421F2490017F7DC /* HomeViewController.swift in Sources */,
+				3D73C0EF2463BBCF00585AA6 /* UIDevice+Extensions.swift in Sources */,
 				3D830E7B2422142C0017F7DC /* ModelLayer.swift in Sources */,
 				3D17E18D2430821200319088 /* OverviewTableViewCellViewModel.swift in Sources */,
 				3D3568942434A17200CE9CAA /* SwinjectStoryboard+Extensions.swift in Sources */,
