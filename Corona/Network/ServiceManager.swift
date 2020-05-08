@@ -8,12 +8,11 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 import RxSwift
 
 
 
-typealias RxonAPIResponse = (_ observable:Observable<(Any?,Int)>)->()
+typealias RxonAPIResponse = (_ observable:Observable<(Foundation.Data?,Int)>)->()
 
 class ServiceManager{
     
@@ -21,9 +20,9 @@ class ServiceManager{
         if ReachabilityManager.isConnectedToNetwork(){
             AF.request(url, method: method, parameters: params, encoding: encoding!, headers: headers).responseJSON{ response in
                 switch response.result{
-                case .success(let value):
+                case .success(_):
                     if let statusCode = response.response?.statusCode{
-                        onResponse(Observable.just((value,statusCode)))
+                        onResponse(Observable.just((response.data,statusCode)))
                     }
                 default:()
                 }

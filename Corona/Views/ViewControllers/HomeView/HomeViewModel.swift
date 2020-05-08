@@ -36,10 +36,12 @@ class HomeViewModelIMPL:HomeViewModel{
     }
     
     var date:String {
-        let date = statistics.updatedDate
+        let dateString = statistics.updatedDate
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy h:mm a"
-        return "Last updated on \(dateFormatter.string(from: date))"
+        let date = dateFormatter.date(from: dateString) ?? Date()
+        let modifiedDateString = dateFormatter.string(from: date)
+        return "Last updated on \(modifiedDateString)"
     }
     
     var hospitalCount:Int {

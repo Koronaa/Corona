@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RxSwift
 
 protocol ModelLayer {
@@ -28,18 +27,21 @@ class ModelLayerIMPL:ModelLayer{
         networkLayer.getStatData { [weak self] networkObservable in
             if let _ = self{
                 networkObservable
-                    .subscribe(onNext: { (response,responseCode) in
+                    .subscribe(onNext: { (responseData,responseCode) in
                         if responseCode == 200{
-                            if let jsonResponse = response as! JSON?{
-                                self?.translationLayer.createStats(from: jsonResponse) { stats in
+                            if let data = responseData{
+                                self?.translationLayer.createStats(from: data) { stats in
                                     onCompleted(stats,nil,false)
                                 }
+                            }else{
+                                let error = Error(title: "Translation Error!", message: "Error while translating data.")
+                                onCompleted(nil,error,true)
                             }
                         }else if responseCode == 515{
                             let error = Error(title: "No Connectivity!", message: "You are appear to be offline.")
                             onCompleted(nil,error,true)
                         }else{
-                             let error = Error(title: "Service Error!", message: "Error while retrieving data.")
+                            let error = Error(title: "Service Error!", message: "Error while retrieving data.")
                             onCompleted(nil,error,true)
                         }
                     }).disposed(by: DisposeBag())

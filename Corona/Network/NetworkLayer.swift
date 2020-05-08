@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 import RxSwift
 
 enum StatRouter{
@@ -38,12 +37,10 @@ class NetworkLayerIMPL:NetworkLayer{
     fileprivate var bag = DisposeBag()
     
     func getStatData(onResponse:@escaping RxonAPIResponse){
-        
         ServiceManager.APIRequest(url: StatRouter.getStat.url, method: StatRouter.getStat.method) { serviceObservable in
-            serviceObservable.subscribe(onNext: { response, responseCode in
-                if response != nil{
-                    let jsonData:JSON = JSON(response!)
-                    onResponse(Observable.just((jsonData,responseCode)))
+            serviceObservable.subscribe(onNext: { responseData, responseCode in
+                if responseData != nil{
+                    onResponse(Observable.just((responseData,responseCode)))
                 }else{
                     onResponse(serviceObservable)
                 }
