@@ -11,6 +11,11 @@ Simple iOS app written in Swift 5 to easily keep up to date with the corona viru
 ![](corona.gif)
 
 
+## Supports
+
+iOS 10+
+
+
 ## Pods Used
 
 Corona use number of open source projects to work properly
