@@ -21,7 +21,7 @@ iOS 10+
 Corona use number of open source projects to work properly
 
 * [Alamofire](https://github.com/Alamofire/Alamofire)
-* [~~SwiftyJSON~~](https://github.com/SwiftyJSON/SwiftyJSON) (Removed in the [85a82b3](https://github.com/Koronaa/Corona/commit/0ef8bd73ebd1f3c02abdf05ec5ada10bf803e535))
+* [~~SwiftyJSON~~](https://github.com/SwiftyJSON/SwiftyJSON) (Removed in [85a82b3](https://github.com/Koronaa/Corona/commit/0ef8bd73ebd1f3c02abdf05ec5ada10bf803e535))
 * [RxSwift](https://github.com/ReactiveX/RxSwift)
 * [RxCocoa](https://github.com/ReactiveX/RxSwift/tree/master/RxCocoa)
 * [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources)
