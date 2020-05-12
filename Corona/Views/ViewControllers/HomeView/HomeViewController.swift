@@ -129,7 +129,7 @@ extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
         case 0:
             return 1
         case 1:
-            return self.homeViewModel.statistics?.hospitals.count ?? 0
+            return homeViewModel.statistics != nil ? homeViewModel.hospitalCount : 0
         default:
             return 0
         }
