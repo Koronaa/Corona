@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     fileprivate var hospitalCellMaker:DependencyRegistryIMPL.HopitalCellMaker!
     fileprivate var refreshControl = UIRefreshControl()
     fileprivate var bag = DisposeBag()
+    fileprivate var isRefreshTriggered:Bool = false
     
     func configure(with viewModel:HomeViewModelIMPL,
                    overviewCellMaker:@escaping DependencyRegistryIMPL.OverviewCellMaker,
@@ -34,14 +35,45 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupObservables()
         setupTableView()
         setupSkeleton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadStatistics(from: homeViewModel, fromRefresh: false)
+        isRefreshTriggered = false
+        loadStatistics(from: homeViewModel)
         setupRefreshControl()
+    }
+    
+    private func setupObservables(){
+        homeViewModel.statistics.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                self.refreshControl.endRefreshing()
+                if !self.isRefreshTriggered{
+                    self.tableView.hideSkeleton()
+                    self.tableView.stopSkeletonAnimation()
+                }
+                self.tableView.reloadData()
+                self.setupUI(homeViewModel: self.homeViewModel)
+            }).disposed(by: bag)
+        
+        homeViewModel.error.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { errorMessage in
+                self.refreshControl.endRefreshing()
+                if let error = errorMessage{
+                    var banner:GrowingNotificationBanner!
+                    if self.isRefreshTriggered{
+                        banner = UIHelper.makeBanner(title: error.title, message: error.message)
+                    }else{
+                        banner = self.showRetryBanner(title: error.title, message: error.message)
+                    }
+                    banner.show()
+                }
+            }).disposed(by: bag)
     }
     
     
@@ -65,33 +97,8 @@ class HomeViewController: UIViewController {
         tableView.startSkeletonAnimation()
     }
     
-    private func loadStatistics(from viewModel:HomeViewModelIMPL,fromRefresh:Bool){
-        viewModel.loadStatistics { statRelay in
-            self.refreshControl.endRefreshing()
-            statRelay.asObservable()
-                .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { (stats, errorMessage, _) in
-                    guard let statistics = stats else{
-                        if let error = errorMessage{
-                            var banner:GrowingNotificationBanner!
-                            if fromRefresh{
-                                banner = UIHelper.makeBanner(title: error.title, message: error.message)
-                            }else{
-                                banner = self.showRetryBanner(title: error.title, message: error.message)
-                            }
-                            banner.show()
-                        }
-                        return
-                    }
-                    self.homeViewModel.statistics = statistics
-                    if !fromRefresh{
-                        self.tableView.hideSkeleton()
-                        self.tableView.stopSkeletonAnimation()
-                    }
-                    self.tableView.reloadData()
-                    self.setupUI(homeViewModel: self.homeViewModel)
-                }).disposed(by: self.bag)
-        }
+    private func loadStatistics(from viewModel:HomeViewModelIMPL){
+        viewModel.loadStatistics()
     }
     
     private func setupUI(homeViewModel:HomeViewModelIMPL){
@@ -104,7 +111,8 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func refresh() {
-        loadStatistics(from: self.homeViewModel,fromRefresh: true)
+        isRefreshTriggered = true
+        loadStatistics(from: self.homeViewModel)
     }
     
     private func showRetryBanner(title:String,message:String) -> GrowingNotificationBanner{
@@ -112,7 +120,8 @@ class HomeViewController: UIViewController {
         banner.autoDismiss = false
         banner.onTap = {
             banner.dismiss()
-            self.loadStatistics(from: self.homeViewModel, fromRefresh: false)
+            self.isRefreshTriggered = false
+            self.loadStatistics(from: self.homeViewModel)
         }
         return banner
     }
@@ -129,7 +138,7 @@ extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
         case 0:
             return 1
         case 1:
-            return homeViewModel.statistics != nil ? homeViewModel.hospitalCount : 0
+            return homeViewModel.statistics.value != nil ? homeViewModel.hospitalCount : 0
         default:
             return 0
         }
@@ -139,11 +148,11 @@ extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
         let section = indexPath.section
         switch section {
         case 0:
-            let stat = self.homeViewModel.statistics
+            let stat = self.homeViewModel.statistics.value
             let cell = overviewCellMaker(tableView,indexPath,stat!)
             return cell
         case 1:
-            let hospital = self.homeViewModel.statistics!.hospitals[indexPath.row]
+            let hospital = self.homeViewModel.statistics.value!.hospitals[indexPath.row]
             let cell = hospitalCellMaker(tableView,indexPath,hospital)
             return cell
         default:
@@ -207,7 +216,7 @@ extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
         case 1:
             switch DeviceManager.getDeviceType() {
             case .iPhone_5_5s_5C_SE:
-                 return 1
+                return 1
             case .iPhone_XsMax_11ProMax,.iPhone_Xr_11:
                 return 3
             default:

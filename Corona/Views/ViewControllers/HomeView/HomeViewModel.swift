@@ -11,32 +11,38 @@ import RxRelay
 
 protocol HomeViewModel {
     
-    func loadStatistics(onComplete: @escaping (_ stats:BehaviorRelay<(Statistics?,Error?,Bool?)>)->Void)
+    func loadStatistics()
     var date:String {get}
     var hospitalCount:Int {get}
-    var statistics:Statistics! {get}
+    var statistics:BehaviorRelay<Statistics?> {get}
+    var error:BehaviorRelay<Error?> {get}
     
 }
 
 class HomeViewModelIMPL:HomeViewModel{
     
     fileprivate let modelLayer:ModelLayerIMPL
-    var statistics:Statistics!
+    var statistics: BehaviorRelay<Statistics?> = BehaviorRelay<Statistics?>(value: nil)
+    var error: BehaviorRelay<Error?> = BehaviorRelay<Error?>(value: nil)
+    
     
     init(modelLayer:ModelLayerIMPL) {
         self.modelLayer = modelLayer
     }
     
-    func loadStatistics(onComplete: @escaping (BehaviorRelay<(Statistics?, Error?, Bool?)>) -> Void) {
-        let statRelay = BehaviorRelay<(Statistics?, Error?, Bool?)>(value: (nil,nil,nil))
-        modelLayer.getStatData { (stat, errorMessage, isRetry) in
-            statRelay.accept((stat,errorMessage,isRetry))
-            onComplete(statRelay)
+    func loadStatistics() {
+        modelLayer.getStatData { (stat, error, _) in
+            if stat != nil{
+                self.statistics.accept(stat)
+            }
+            if error != nil{
+                self.error.accept(error)
+            }
         }
     }
     
     var date:String {
-        let dateString = statistics.updatedDate
+        let dateString = statistics.value?.updatedDate ?? DateFormatter().string(from: Date())
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
@@ -47,7 +53,6 @@ class HomeViewModelIMPL:HomeViewModel{
     }
     
     var hospitalCount:Int {
-        return statistics.hospitals.count
+        return statistics.value?.hospitals.count ?? 0
     }
-    
 }
