@@ -11,7 +11,7 @@ import Foundation
 struct URLConstants {
     
     struct Api {
-        static let HOST = "http://hpb.health.gov.lk/api"
+        static let HOST = "https://www.hpb.health.gov.lk/api"
         
         struct Path {
             static var stat:String{
