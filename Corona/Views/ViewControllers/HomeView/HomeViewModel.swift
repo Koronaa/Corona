@@ -43,13 +43,7 @@ class HomeViewModelIMPL:HomeViewModel{
     
     var date:String {
         let dateString = statistics.value?.updatedDate ?? DateFormatter().string(from: Date())
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
-        let date = dateFormatter.date(from: dateString) ?? Date()
-        dateFormatter.dateFormat = "MMM d, yyyy h:mm a"
-        let modifiedDateString = dateFormatter.string(from: date)
-        return "Last updated on \(modifiedDateString)"
+        return "Last updated on \(dateString.formattedDate)"
     }
     
     var hospitalCount:Int {

@@ -12,6 +12,7 @@ import RxSwift
 import SkeletonView
 import NotificationBannerSwift
 
+
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var dateTimeLabel: UILabel!
@@ -125,6 +126,15 @@ class HomeViewController: UIViewController {
         }
         return banner
     }
+    
+    private func showActivityViewController(for image:UIImage,in shareManager:SharingManager){
+        let items: [Any] = [image]
+        let activityViewController = TJActivityViewController(activityItems: items, applicationActivities: nil)
+        activityViewController.overrideActivityType("com.burbn.instagram.shareextension") {
+            shareManager.shareOnIG(image: image)
+        }
+        self.present(activityViewController, animated: true, completion: nil)
+    }
 }
 
 extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
@@ -180,6 +190,22 @@ extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
             return "Hospitals' Overview"
         default:
             return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            if let stat = self.homeViewModel.statistics.value{
+                let shareManager = SharingManager(statistics: stat)
+                shareManager.createAsset(onCompleted: { (image) in
+                    if let image = image{
+                        self.showActivityViewController(for: image,in: shareManager)
+                    }
+                })
+            }
+        default:()
+            
         }
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol OverviewTableViewCellViewModel {
+protocol OverviewViewModel {
     var newDeathCount:Int {get}
     var newCasesCount:Int {get}
     var reportedCasesCount:String {get}
@@ -16,7 +16,7 @@ protocol OverviewTableViewCellViewModel {
     var deathCount:Int {get}
 }
 
-class OverviewTableViewCellViewModelIMPL:OverviewTableViewCellViewModel{
+class OverviewTableViewCellViewModelIMPL:OverviewViewModel{
     
     var statistics:Statistics!
     
