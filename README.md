@@ -16,7 +16,7 @@ Simple iOS app written in Swift 5 to easily keep up to date with the corona viru
 iOS 10+
 
 
-## Pods Used
+## Libraries Used
 
 Corona use number of open source projects to work properly
 
@@ -29,6 +29,7 @@ Corona use number of open source projects to work properly
 * [Swinject](https://github.com/Swinject/Swinject)
 * [SwinjectStoryboard](https://github.com/Swinject/SwinjectStoryboard)
 * [SkeletonView](https://github.com/Juanpe/SkeletonView)
+* [TJActivityViewController](https://github.com/timonus/TJActivityViewController)
 
 ### Note:
 I had to tweak [NotificationBannerSwift](https://github.com/Daltron/NotificationBanner) a little bit to avoid a crash. So if in case you do a `pod install` make sure to do the following change in BaseNotificationBanner.swift file,
