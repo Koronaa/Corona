@@ -24,6 +24,7 @@ class HomeViewModelIMPL:HomeViewModel{
     fileprivate let modelLayer:ModelLayerIMPL
     var statistics: BehaviorRelay<Statistics?> = BehaviorRelay<Statistics?>(value: nil)
     var error: BehaviorRelay<Error?> = BehaviorRelay<Error?>(value: nil)
+    static var isDarkModeON = false
     
     
     init(modelLayer:ModelLayerIMPL) {

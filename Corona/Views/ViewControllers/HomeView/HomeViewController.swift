@@ -184,7 +184,16 @@ extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         self.tableView.reloadData()
+        if #available(iOS 13.0, *) {
+            if UITraitCollection.current.userInterfaceStyle == .dark{
+                HomeViewModelIMPL.isDarkModeON = true
+            }else{
+                HomeViewModelIMPL.isDarkModeON = false
+            }
+        } 
     }
+    
+    
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {

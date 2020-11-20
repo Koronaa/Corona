@@ -11,13 +11,8 @@ import UIKit
 extension UIColor{
     
     static var adaptiveWhite:UIColor{
-        if #available(iOS 13.0, *) {
-            if UITraitCollection.current.userInterfaceStyle == .dark {
-                return self.black
-            }
-            else {
-                return self.white
-            }
+        if HomeViewModelIMPL.isDarkModeON{
+            return self.black
         }else{
             return self.white
         }
