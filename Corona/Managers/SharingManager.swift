@@ -275,9 +275,10 @@ class SharingManager:OverviewViewModel{
             let todayTotalCasesCountRectangleTextContent = newCasesCount >= 1 ? "+\(newCasesCount.description)" : ""
             let todayTotalCasesCountRectangleStyle = NSMutableParagraphStyle()
             todayTotalCasesCountRectangleStyle.alignment = .right
+            let color = HomeViewModelIMPL.isDarkModeON ? UIColor.white : textColor
             let todayTotalCasesCountRectangleFontAttributes = [
                 .font: UIFont(name: "Avenir-Heavy", size: 3)!,
-                .foregroundColor: textColor,
+                .foregroundColor: color,
                 .paragraphStyle: todayTotalCasesCountRectangleStyle,
             ] as [NSAttributedString.Key: Any]
             

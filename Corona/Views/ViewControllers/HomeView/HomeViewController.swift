@@ -39,6 +39,7 @@ class HomeViewController: UIViewController {
         setupObservables()
         setupTableView()
         setupSkeleton()
+        updateInterfaceStyle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -135,6 +136,21 @@ class HomeViewController: UIViewController {
         }
         self.present(activityViewController, animated: true, completion: nil)
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        self.tableView.reloadData()
+        updateInterfaceStyle()
+    }
+    
+    private func updateInterfaceStyle(){
+        if #available(iOS 13.0, *) {
+            if UITraitCollection.current.userInterfaceStyle == .dark{
+                HomeViewModelIMPL.isDarkModeON = true
+            }else{
+                HomeViewModelIMPL.isDarkModeON = false
+            }
+        }
+    }
 }
 
 extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
@@ -181,19 +197,6 @@ extension HomeViewController:UITableViewDelegate,SkeletonTableViewDataSource{
             return 0.0
         }
     }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        self.tableView.reloadData()
-        if #available(iOS 13.0, *) {
-            if UITraitCollection.current.userInterfaceStyle == .dark{
-                HomeViewModelIMPL.isDarkModeON = true
-            }else{
-                HomeViewModelIMPL.isDarkModeON = false
-            }
-        } 
-    }
-    
-    
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
