@@ -56,7 +56,7 @@ class SharingManager:OverviewViewModel{
             let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 6.0, y: 18.5, width: 42, height: 63.5), cornerRadius: 5)
             context.saveGState()
             context.setShadow(offset: shadow.shadowOffset, blur: shadow.shadowBlurRadius, color: (shadow.shadowColor as! UIColor).cgColor)
-            UIColor.white.setFill()
+            UIColor.adaptiveWhite.setFill()
             rectangle2Path.fill()
             context.restoreGState()
             

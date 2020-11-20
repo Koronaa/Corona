@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,7 +23,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="National Institute of Infectious Diseases" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="7qR-4a-Iuf">
                                 <rect key="frame" x="10" y="10" width="443" height="26"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="19"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
@@ -71,7 +72,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="7NU-Wq-8D2" firstAttribute="leading" secondItem="jz8-LL-GJK" secondAttribute="leading" id="4gO-9Z-eal"/>
                                                             <constraint firstItem="7NU-Wq-8D2" firstAttribute="top" secondItem="xZu-IX-9Rj" secondAttribute="bottom" constant="5" id="78U-nW-SAj"/>
@@ -100,7 +101,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="AOu-xZ-76j" firstAttribute="leading" secondItem="9nP-t0-EJ6" secondAttribute="leading" id="EMk-E5-w6p"/>
                                                             <constraint firstItem="1hO-P9-jqb" firstAttribute="top" secondItem="AOu-xZ-76j" secondAttribute="bottom" constant="5" id="ZFG-O5-kEy"/>
@@ -124,7 +125,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="BPM-eJ-FXs" firstAttribute="top" secondItem="Ni7-5l-oqb" secondAttribute="bottom" id="EO3-d7-n6A"/>
                                             <constraint firstItem="Ni7-5l-oqb" firstAttribute="leading" secondItem="la4-qt-Y1w" secondAttribute="leading" id="JUz-i7-gkQ"/>
@@ -178,7 +179,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="ecz-6I-7fi" firstAttribute="leading" secondItem="vhO-KN-80D" secondAttribute="leading" id="CEA-o7-L4v"/>
                                                             <constraint firstAttribute="trailing" secondItem="ecz-6I-7fi" secondAttribute="trailing" id="cZP-4H-pyH"/>
@@ -207,7 +208,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="Xko-J6-JTD" firstAttribute="top" secondItem="hWp-3y-akj" secondAttribute="top" id="6Y6-Fs-geQ"/>
                                                             <constraint firstItem="v41-gU-eKQ" firstAttribute="leading" secondItem="hWp-3y-akj" secondAttribute="leading" id="FJ3-hP-FOk"/>
@@ -231,7 +232,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="6lF-Jt-AMU" secondAttribute="trailing" id="1T7-tW-kWy"/>
                                             <constraint firstItem="jHo-Dr-DWz" firstAttribute="top" secondItem="6lF-Jt-AMU" secondAttribute="bottom" constant="5" id="6HY-hI-Ygn"/>
@@ -311,4 +312,9 @@
             <point key="canvasLocation" x="181.8840579710145" y="107.8125"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

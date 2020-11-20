@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -40,6 +40,7 @@
 		ACE659DFF7583F9B71860D91 /* libPods-Corona.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C7C59C099CEB76D156B069 /* libPods-Corona.a */; };
 		B62607E0254D77BD00025B17 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62607DF254D77BD00025B17 /* String+Extensions.swift */; };
 		B6914AF6254D394500B01091 /* SharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6914AF5254D394500B01091 /* SharingManager.swift */; };
+		B6970F8A2567DD3800DE24F6 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6970F892567DD3800DE24F6 /* UIColor+Extensions.swift */; };
 		B6F9A92B254D50E6006290FF /* TJActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F9A929254D50E6006290FF /* TJActivityViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		9DA1216B457735D200BE4A64 /* Pods-Corona.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Corona.release.xcconfig"; path = "Target Support Files/Pods-Corona/Pods-Corona.release.xcconfig"; sourceTree = "<group>"; };
 		B62607DF254D77BD00025B17 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		B6914AF5254D394500B01091 /* SharingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingManager.swift; sourceTree = "<group>"; };
+		B6970F892567DD3800DE24F6 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		B6F9A928254D50E5006290FF /* Corona-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Corona-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6F9A929254D50E6006290FF /* TJActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TJActivityViewController.m; sourceTree = "<group>"; };
 		B6F9A92A254D50E6006290FF /* TJActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TJActivityViewController.h; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				3D73C0EE2463BBCF00585AA6 /* UIDevice+Extensions.swift */,
 				B62607DF254D77BD00025B17 /* String+Extensions.swift */,
 				3DAE1F7724232D2400F6E019 /* Int+Extensions.swift */,
+				B6970F892567DD3800DE24F6 /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,7 +329,7 @@
 				};
 			};
 			buildConfigurationList = 3D830E442421F2490017F7DC /* Build configuration list for PBXProject "Corona" */;
-			compatibilityVersion = "Xcode 11.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -394,6 +397,7 @@
 				3D830E7D2422326A0017F7DC /* OverviewTableViewCell.swift in Sources */,
 				3D830E792422134B0017F7DC /* NetworkLayer.swift in Sources */,
 				3D17E18F243093DA00319088 /* TranslationLayer.swift in Sources */,
+				B6970F8A2567DD3800DE24F6 /* UIColor+Extensions.swift in Sources */,
 				3D3390C524653DB700167483 /* Data.swift in Sources */,
 				3D830E752422115C0017F7DC /* ReachabilityManager.swift in Sources */,
 				B6914AF6254D394500B01091 /* SharingManager.swift in Sources */,
@@ -566,7 +570,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R3GW2NEGBJ;
 				INFOPLIST_FILE = Corona/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -574,7 +578,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korona.coronalk;
 				PRODUCT_NAME = Corona;
 				PROVISIONING_PROFILE_SPECIFIER = "Corona Dev";
@@ -594,7 +598,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R3GW2NEGBJ;
 				INFOPLIST_FILE = Corona/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -602,7 +606,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korona.coronalk;
 				PRODUCT_NAME = Corona;
 				PROVISIONING_PROFILE_SPECIFIER = "Corona Dev";
