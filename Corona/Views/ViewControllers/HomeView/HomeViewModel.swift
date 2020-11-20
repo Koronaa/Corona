@@ -42,8 +42,11 @@ class HomeViewModelIMPL:HomeViewModel{
     }
     
     var date:String {
-        let dateString = statistics.value?.updatedDate ?? DateFormatter().string(from: Date())
-        return "Last updated on \(dateString.formattedDate)"
+        if let dateString = statistics.value?.updatedDate{
+            return "Last updated on \(dateString.formattedDate)"
+        }else{
+            return "Last requested on \(DateFormatter().string(from: Date()).formattedDate)"
+        }
     }
     
     var hospitalCount:Int {
