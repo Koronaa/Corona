@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -72,7 +71,6 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="7NU-Wq-8D2" firstAttribute="leading" secondItem="jz8-LL-GJK" secondAttribute="leading" id="4gO-9Z-eal"/>
                                                             <constraint firstItem="7NU-Wq-8D2" firstAttribute="top" secondItem="xZu-IX-9Rj" secondAttribute="bottom" constant="5" id="78U-nW-SAj"/>
@@ -101,7 +99,6 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="AOu-xZ-76j" firstAttribute="leading" secondItem="9nP-t0-EJ6" secondAttribute="leading" id="EMk-E5-w6p"/>
                                                             <constraint firstItem="1hO-P9-jqb" firstAttribute="top" secondItem="AOu-xZ-76j" secondAttribute="bottom" constant="5" id="ZFG-O5-kEy"/>
@@ -112,7 +109,6 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="jz8-LL-GJK" firstAttribute="width" secondItem="BPM-eJ-FXs" secondAttribute="width" multiplier="1:2" id="CEQ-Ld-wHk"/>
                                                     <constraint firstItem="9nP-t0-EJ6" firstAttribute="leading" secondItem="jz8-LL-GJK" secondAttribute="trailing" id="FMj-6l-wsp"/>
@@ -125,7 +121,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="BPM-eJ-FXs" firstAttribute="top" secondItem="Ni7-5l-oqb" secondAttribute="bottom" id="EO3-d7-n6A"/>
                                             <constraint firstItem="Ni7-5l-oqb" firstAttribute="leading" secondItem="la4-qt-Y1w" secondAttribute="leading" id="JUz-i7-gkQ"/>
@@ -179,7 +175,6 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="ecz-6I-7fi" firstAttribute="leading" secondItem="vhO-KN-80D" secondAttribute="leading" id="CEA-o7-L4v"/>
                                                             <constraint firstAttribute="trailing" secondItem="ecz-6I-7fi" secondAttribute="trailing" id="cZP-4H-pyH"/>
@@ -208,7 +203,6 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="Xko-J6-JTD" firstAttribute="top" secondItem="hWp-3y-akj" secondAttribute="top" id="6Y6-Fs-geQ"/>
                                                             <constraint firstItem="v41-gU-eKQ" firstAttribute="leading" secondItem="hWp-3y-akj" secondAttribute="leading" id="FJ3-hP-FOk"/>
@@ -219,7 +213,6 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="vhO-KN-80D" firstAttribute="width" secondItem="bXh-03-WKU" secondAttribute="width" multiplier="1:2" id="2G5-8Z-5kD"/>
                                                     <constraint firstItem="vhO-KN-80D" firstAttribute="top" secondItem="bXh-03-WKU" secondAttribute="top" id="Cuq-K7-6e3"/>
@@ -232,7 +225,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="6lF-Jt-AMU" secondAttribute="trailing" id="1T7-tW-kWy"/>
                                             <constraint firstItem="jHo-Dr-DWz" firstAttribute="top" secondItem="6lF-Jt-AMU" secondAttribute="bottom" constant="5" id="6HY-hI-Ygn"/>
@@ -312,9 +305,4 @@
             <point key="canvasLocation" x="181.8840579710145" y="107.8125"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

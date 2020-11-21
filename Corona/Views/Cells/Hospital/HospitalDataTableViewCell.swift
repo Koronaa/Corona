@@ -44,6 +44,8 @@ class HospitalDataTableViewCell: UITableViewCell {
         UIHelper.addShadow(to: leftView)
         UIHelper.addCornerRadius(to: rightView)
         UIHelper.addShadow(to: rightView)
+        leftView.backgroundColor = UIColor.adaptiveWhite
+        rightView.backgroundColor = UIColor.adaptiveWhite
     }
     
     public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with viewModel: HospitalDataTableViewCellViewModelIMPL) -> HospitalDataTableViewCell {

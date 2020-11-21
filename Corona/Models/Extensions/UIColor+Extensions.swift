@@ -12,9 +12,13 @@ extension UIColor{
     
     static var adaptiveWhite:UIColor{
         if HomeViewModelIMPL.isDarkModeON{
-            return self.black
+            return self.customBlack
         }else{
             return self.white
         }
+    }
+    
+    static var customBlack:UIColor{
+        UIColor(red: 33/256, green: 33/256, blue: 33/256, alpha: 1)
     }
 }

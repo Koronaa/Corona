@@ -53,6 +53,7 @@ class OverviewTableViewCell: UITableViewCell {
     private func setupCell(){
         UIHelper.addShadow(to: shadowView)
         UIHelper.addCornerRadius(to: shadowView)
+        shadowView.backgroundColor = UIColor.adaptiveWhite
     }
     
     public static func dequeue(from tableView: UITableView, for indexPath: IndexPath, with viewModel: OverviewTableViewCellViewModelIMPL) -> OverviewTableViewCell {
