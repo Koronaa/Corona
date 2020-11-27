@@ -21,4 +21,9 @@ extension UIColor{
     static var customBlack:UIColor{
         UIColor(red: 33/256, green: 33/256, blue: 33/256, alpha: 1)
     }
+    
+    static var coronaRed:UIColor{
+        UIColor(red: 209/255, green: 82/255, blue: 83/255, alpha: 1.0)
+    }
+    
 }

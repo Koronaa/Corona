@@ -38,7 +38,7 @@ class SharingManager:OverviewViewModel{
             let cYellow = UIColor(red: 0.961, green: 0.765, blue: 0.267, alpha: 1.000)
             let textColor = UIColor(red: 0.286, green: 0.349, blue: 0.388, alpha: 1.000)
             let textColor2 = UIColor(red: 0.169, green: 0.416, blue: 0.651, alpha: 1.000)
-            let cRed = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 0.751)
+            let cRed = UIColor.coronaRed
             
             //// Shadow Declarations
             let shadow = NSShadow()
